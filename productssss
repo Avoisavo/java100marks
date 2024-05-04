@@ -1,1 +1,124 @@
-i am a file
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Product {
+    private String name;
+    private double price;
+    private int pointsEarned;
+
+    public Product(String name, double price, int pointsEarned) {
+        this.name = name;
+        this.price = price;
+        this.pointsEarned = pointsEarned;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public int getPointsEarned() {
+        return pointsEarned;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Ask the user for their name
+        System.out.print("Enter your name: ");
+        String userName = scanner.nextLine();
+
+        List<Product> products = new ArrayList<>();
+        products.add(new Product("Tshirt    ", 10.50, 10));
+        products.add(new Product("Pants    ", 20.99, 20));
+        products.add(new Product("Cap       ", 15.99, 15));
+
+        List<Product> selectedProducts = new ArrayList<>();
+        boolean continueAdding = true;
+
+        while (continueAdding) {
+            displayProducts(products); // method
+            System.out.print("Enter the number of the item you want to purchase or 0 to finish: ");
+            int selectedItem = scanner.nextInt();
+
+            if (selectedItem >= 1 && selectedItem <= products.size()) {
+                selectedProducts.add(products.get(selectedItem - 1));
+                System.out.println("Item added to cart.");
+            } else if (selectedItem == 0) {
+                continueAdding = false;
+            } else {
+                System.out.println("Invalid selection.");
+            }
+        }
+
+        double totalPrice = 0;
+        int totalPointsEarned = 0;
+
+        System.out.println("Your cart:");
+        for (Product product : selectedProducts) {
+            System.out.println(product.getName() + "\tRM" + product.getPrice() + "\tPoints Earned: " + product.getPointsEarned());
+            totalPrice += product.getPrice();
+            totalPointsEarned += product.getPointsEarned();
+        }
+
+        System.out.println("Total price: RM" + totalPrice);
+        System.out.println("Total points earned: " + totalPointsEarned);
+
+        System.out.print("Do you want to make payment? (yes/no): ");
+        String makePayment = scanner.next();
+
+        if (makePayment.equalsIgnoreCase("yes")) {
+            System.out.println("Payment successful.");
+
+            // Get the current date
+            LocalDate currentDate = LocalDate.now();
+
+            // Calculate the expiry date (6 months from the current date)
+            LocalDate expiryDate = currentDate.plusMonths(6);
+
+            // Save points earned, user's name, earning date, and expiry date to the file
+            savePointsEarnedToFile(userName, totalPointsEarned, currentDate, expiryDate);
+        } else {
+            System.out.println("Payment cancelled.");
+        }
+    }
+
+    public static void displayProducts(List<Product> products) {
+        System.out.println("Available Items:");
+        System.out.println("-------------------------------------------------");
+        System.out.println("S.No\tItem\t\tPrice\tPoints Earned");
+        System.out.println("-------------------------------------------------");
+        for (int i = 0; i < products.size(); i++) {
+            Product product = products.get(i);
+            System.out.println((i + 1) + "\t" + product.getName() + "\tRM" + product.getPrice() + "\t" + product.getPointsEarned());
+        }
+        System.out.println("-------------------------------------------------");
+    }
+
+    public static void savePointsEarnedToFile(String userName, int pointsEarned, LocalDate earningDate, LocalDate expiryDate) {
+        try {
+            // Format the dates
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String formattedEarningDate = earningDate.format(formatter);
+            String formattedExpiryDate = expiryDate.format(formatter);
+
+            BufferedWriter writer = new BufferedWriter(new FileWriter("/Users/avo/Desktop/javaAssignment/Product/src/product/points_earned.txt", true));
+
+            // Append user's name, earning date, expiry date, and points earned to the file
+            writer.write("User: " + userName + "\tEarning Date: " + formattedEarningDate + "\tExpiry Date: " + formattedExpiryDate + "\tTotal points earned: " + pointsEarned + "\n");
+            writer.close();
+            System.out.println("Points earned saved to file successfully.");
+        } catch (IOException e) {
+            System.err.println("Error occurred while saving points earned to file: " + e.getMessage());
+        }
+    }
+}
