@@ -51,7 +51,7 @@ public class Customer {
     }
 
     public static void main(String[] args) {
-        Customer[] customers = loadCustomersFromFile(); // Load customers from file
+        Customer[] customers = loadCustomersFromFile(); // Load customers from fi
         Scanner scanner = new Scanner(System.in);
 
         boolean validOption = false;
