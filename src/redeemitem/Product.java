@@ -47,10 +47,9 @@ public class Product {
         System.out.println("-------------------------------------------------");
     }
 
-    public static List<Product> selectProducts() {
+    public static List<Product> selectProducts(Scanner scanner) {
         List<Product> products = getAvailableProducts();
         List<Product> selectedProducts = new ArrayList<>();
-        Scanner scanner = new Scanner(System.in);
         boolean continueAdding = true;
 
         while (continueAdding) {

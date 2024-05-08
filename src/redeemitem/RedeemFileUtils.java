@@ -10,10 +10,10 @@ public class RedeemFileUtils {
     private static ArrayList<Integer> itemCosts = new ArrayList<>();
     private static ArrayList<Integer> quantity = new ArrayList<>();
     private static ArrayList<Integer> itemIndices = new ArrayList<>(); // Added for tracking item indices
-    private static Scanner scanner = new Scanner(System.in);
-    private static final String itemList = "redeemableItems.txt";
 
-    public static void addItems() {
+    private static final String itemList ="/Users/avo/Documents/GitHub/java100marks/src/data/redeemableItems.txt";
+
+    public static void addItems(Scanner scanner) {
         int index = 1;
         System.out.println("Please enter the items you want to add. Enter item name, point cost, and quantity. Enter 0 for the item name to stop.");
         while (true) {
@@ -95,7 +95,7 @@ public class RedeemFileUtils {
         }
     }
 
-    public static void deleteItem() {
+    public static void deleteItem(Scanner scanner) {
         System.out.println("Enter the index of the item you want to delete:");
         int index = scanner.nextInt();
         scanner.nextLine();

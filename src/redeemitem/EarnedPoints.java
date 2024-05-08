@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class EarnedPoints {
 
-    private static final String POINTS_FILE_PATH = "C:\\Users\\ladym\\Documents\\NetBeansProjects\\RedeemItem\\points_earned.txt";
+    private static final String POINTS_FILE_PATH = "/Users/avo/Documents/GitHub/java100marks/src/data/points_earned.txt";
 
     public static void updatePointsEarned(int userId, int additionalPoints, int totalEarnedPoints) {
         Map<Integer, Integer> pointsMap = new HashMap<>();

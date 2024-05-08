@@ -1,13 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package redeemitem;
 
-/**
- *
- * @author ladym
- */
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -30,8 +23,7 @@ public class Payment {
     }
 
     // Ask user to make PAYMENT
-    public static boolean makePayment() {
-        Scanner scanner = new Scanner(System.in);
+    public static boolean makePayment(Scanner scanner) {
         System.out.print("Do you want to make payment? (yes/no): ");
         String makePayment = scanner.next();
 

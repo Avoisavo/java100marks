@@ -1,13 +1,13 @@
-
 package redeemitem;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+
 public class RetrivePoints {
 
-    private static final String POINTS_FILE_PATH = "/Users/avo/Desktop/RedeemItem/nbproject/points_earned.txt";
+    private static final String POINTS_FILE_PATH = "/Users/avo/Documents/GitHub/java100marks/src/data/points_earned.txt";
 
     public static int getTotalPointsEarned(int userId) {
         int totalPoints = 0;
