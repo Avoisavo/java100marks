@@ -16,12 +16,12 @@ public static void savePointsEarned(int userId, LocalDate earningDate, int total
         writer.write("Expiry Date: " + userId + "\n");
         writer.write("Total Points Earned: " + totalPointsEarned + "\n\n");
         
-        writer.flush(); // Flush to ensure data is written immediately
+        writer.flush();
 
         System.out.println("Points earned saved to file successfully.");
     } catch (IOException e) {
         System.err.println("Error occurred while saving points earned to file: " + e.getMessage());
-        e.printStackTrace(); // Print stack trace for debugging
+        e.printStackTrace(); 
     }
 }
 

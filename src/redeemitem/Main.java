@@ -11,12 +11,16 @@ public class Main {
     public static void main(String[] args) {
         int choice;
         do {
+            System.out.println("================================");
             System.out.println("Welcome to Loyalty Program Menu");
+            System.out.println("================================");
             System.out.println("1. Register");
             System.out.println("2. Earned Point");
             System.out.println("3. Redeem Points");
             System.out.println("4. Check Loyalty");
-            System.out.println("5. Exit");
+            System.out.println("5. Report");
+            System.out.println("6. Exit");
+            System.out.println("================================");
             System.out.print("Enter your choice: ");
             choice = scanner.nextInt();
 
@@ -34,12 +38,15 @@ public class Main {
                     checkLoyalty();
                     break;
                 case 5:
+                    report();
+                    break;
+                case 6:
                     System.out.println("Exiting Loyalty Program. Goodbye!");
                     break;
                 default:
                     System.out.println("Invalid choice. Please enter a number between 1 and 5.");
             }
-        } while (choice != 5);
+        } while (choice != 6);
 
         scanner.close();
     }
@@ -186,6 +193,15 @@ public class Main {
 
     public static void checkLoyalty() {
         System.out.println("You have selected Check Loyalty.");
-        // Add loyalty check logic here
+        int userId = information.getUserId(Main.scanner);
+        
+        // Create an instance of LoyaltyStatus
+        LoyaltyStatus loyaltyStatus = new LoyaltyStatus();
+        loyaltyStatus.readLoyaltyStatusFromFile(userId);
+
+ 
+    }
+    public static void report(){
+        
     }
 }

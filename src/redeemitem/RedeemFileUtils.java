@@ -12,7 +12,7 @@ public class RedeemFileUtils {
     private static ArrayList<Integer> itemIndices = new ArrayList<>(); // Added for tracking item indices
     private static int lastAddedItemIndex = 1;
 
-    private static final String itemList ="C:\\Users\\ladym\\Documents\\GitHub\\java100marks\\src\\data\\redeemableItems.txt";
+    private static final String itemList ="/Users/avo/Documents/GitHub/java100marks/src/data/src/data/redeemableItems.txt";
 
     public static void addItems(Scanner scanner) {
         int index = lastAddedItemIndex; // Start from the last added item's index
