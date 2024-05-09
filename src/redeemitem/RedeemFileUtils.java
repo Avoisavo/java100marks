@@ -10,11 +10,12 @@ public class RedeemFileUtils {
     private static ArrayList<Integer> itemCosts = new ArrayList<>();
     private static ArrayList<Integer> quantity = new ArrayList<>();
     private static ArrayList<Integer> itemIndices = new ArrayList<>(); // Added for tracking item indices
+    private static int lastAddedItemIndex = 1;
 
-    private static final String itemList ="/Users/avo/Documents/GitHub/java100marks/src/data/redeemableItems.txt";
+    private static final String itemList ="C:\\Users\\ladym\\Documents\\GitHub\\java100marks\\src\\data\\redeemableItems.txt";
 
     public static void addItems(Scanner scanner) {
-        int index = 1;
+        int index = lastAddedItemIndex; // Start from the last added item's index
         System.out.println("Please enter the items you want to add. Enter item name, point cost, and quantity. Enter 0 for the item name to stop.");
         while (true) {
             System.out.println("Item " + index);
@@ -52,6 +53,9 @@ public class RedeemFileUtils {
                 itemCosts.add(itemCost);
                 quantity.add(itemQuantity);
                 itemIndices.add(index); // Add the index to the list
+
+                // Update the last added item's index
+                lastAddedItemIndex = index + 1; // Increment the index for the next item
 
                 index++;
             } catch (NumberFormatException e) {
@@ -93,19 +97,34 @@ public class RedeemFileUtils {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        lastAddedItemIndex = 1;
     }
 
     public static void deleteItem(Scanner scanner) {
         System.out.println("Enter the index of the item you want to delete:");
-        int index = scanner.nextInt();
-        scanner.nextLine();
-        int newIndex = index - 1;
+        int indexToDelete = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline left-over
+        int actualIndex = indexToDelete - 1; // Adjust for 0-based indexing
 
-        if (newIndex >= 0 && newIndex < itemIndices.size()) {
-            itemIndices.remove(newIndex);
-            redeemableItems.remove(newIndex);
-            itemCosts.remove(newIndex);
-            quantity.remove(newIndex);
+        if (actualIndex >= 0 && actualIndex < itemIndices.size()) {
+            // Remove the item from all lists
+            itemIndices.remove(actualIndex);
+            redeemableItems.remove(actualIndex);
+            itemCosts.remove(actualIndex);
+            quantity.remove(actualIndex);
+
+            // Shift the indices of the items that come after the deleted item down by one
+            for (int i = 0; i < itemIndices.size(); i++) {
+                if (itemIndices.get(i) > indexToDelete) {
+                    itemIndices.set(i, itemIndices.get(i) - 1);
+                }
+            }
+
+            // Update the last added item's index if necessary
+            if (lastAddedItemIndex > actualIndex) {
+                lastAddedItemIndex--;
+            }
+
             System.out.println("Item deleted successfully.");
             saveItems();
         } else {
@@ -166,7 +185,7 @@ public class RedeemFileUtils {
     }
 
     public static int getItemIndexByName(String itemName) {
-        for (int i = 0; i < redeemableItems.size(); i++) {
+         for (int i = 0; i < redeemableItems.size(); i++) {
             if (redeemableItems.get(i).equals(itemName)) {
                 return itemIndices.get(i);
             }

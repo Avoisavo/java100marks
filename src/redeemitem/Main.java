@@ -5,7 +5,9 @@ import java.util.Scanner;
 import java.time.LocalDate;
 
 public class Main {
+
     public static Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args) {
         int choice;
         do {
@@ -52,7 +54,6 @@ public class Main {
 
         // Assuming the information class is available with the getUserId() method
         int userId = information.getUserId(Main.scanner);
-
 
         // Show available products
         List<Product> availableProducts = Product.getAvailableProducts();
@@ -174,10 +175,12 @@ public class Main {
 
                     }
                     break;
-
+                case 6:
+                    continueLoop = false; // Set the loop condition to false to exit the loop
+                    break;
             }
         }
-    
+
         // Add redeem points logic here
     }
 
@@ -186,4 +189,3 @@ public class Main {
         // Add loyalty check logic here
     }
 }
-
