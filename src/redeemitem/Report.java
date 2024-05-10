@@ -4,17 +4,6 @@ package redeemitem;
 import java.util.HashMap;
 import java.util.Map;
 
-
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
-/**
- *
- * @author Jason Paw
- */
-// Abstract class for Report
 public abstract class Report {
     protected String loyaltyStatus;
     protected int totalPointsEarned;
@@ -23,7 +12,6 @@ public abstract class Report {
     protected Map<Integer, Integer> yearlyRedeemedAmounts;
     protected Map<Integer, Integer> pointsEarnedData;
     
-    // Constructor
     public Report(String loyaltyStatus, int totalPointsEarned, int totalPointsRedeemed,int totalProductRedeemed) {
         this.loyaltyStatus = loyaltyStatus;
         this.totalPointsEarned = totalPointsEarned;
@@ -32,8 +20,6 @@ public abstract class Report {
         this.yearlyRedeemedAmounts = new HashMap<>();
     }
     
-
-    // Abstract method to generate report
     public abstract void generateReport();
 
     void addYearlyRedeemedAmount(int i, int i0) {
@@ -151,7 +137,6 @@ public abstract class Report {
         this.pointsEarnedData = new HashMap<>();
     }
 
-    // Method to add points earned data for a specific year
 
     public void addPointsEarnedData(int year, int pointsEarned) {
         pointsEarnedData.put(year, pointsEarned);

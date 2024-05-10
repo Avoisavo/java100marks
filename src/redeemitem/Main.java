@@ -50,7 +50,6 @@ public class Main {
 
         scanner.close();
     }
-
     public static void register() {
         System.out.println("You have selected Register.");
         // Add your registration logic here
@@ -58,14 +57,8 @@ public class Main {
 
     public static void earnedPoint() {
         System.out.println("You have selected Earned Point.");
-
-        // Assuming the information class is available with the getUserId() method
         int userId = information.getUserId(Main.scanner);
-
-        // Show available products
         List<Product> availableProducts = Product.getAvailableProducts();
-
-        // Select products and display cart contents
         ShoppingCart cart = new ShoppingCart();
         List<Product> selectedProducts = Product.selectProducts(scanner);
         for (Product product : selectedProducts) {
@@ -87,7 +80,6 @@ public class Main {
 
             //UPDATE POINTS
             EarnedPoints.updatePointsEarned(userId, totalPointsEarned, totalEarnedPoints);
-
         }
     }
 
@@ -190,18 +182,29 @@ public class Main {
 
         // Add redeem points logic here
     }
-
+    
     public static void checkLoyalty() {
         System.out.println("You have selected Check Loyalty.");
         int userId = information.getUserId(Main.scanner);
         
-        // Create an instance of LoyaltyStatus
         LoyaltyStatus loyaltyStatus = new LoyaltyStatus();
         loyaltyStatus.readLoyaltyStatusFromFile(userId);
 
  
     }
     public static void report(){
-        
+        System.out.println("You have selected  Loyalty.");
+        //instance
+        Report goldReport = new GoldStatusReport(1000, 500, 10);
+        Report silverReport = new SilverStatusReport(800, 400, 8);
+        Report memberReport = new MemberStatusReport(600, 300, 6);
+        Report redemptionTrendsReport = new RedemptionTrendsReport(0, 0, 0);
+        Report pointsEarnedTrendsReport = new PointsEarnedTrendsReport(0, 0, 0);
+
+        goldReport.generateReport();
+        silverReport.generateReport();
+        memberReport.generateReport();
+        redemptionTrendsReport.generateReport();
+        pointsEarnedTrendsReport.generateReport();
     }
 }
