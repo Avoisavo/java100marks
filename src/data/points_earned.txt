@@ -1,0 +1,15 @@
+User ID: 999
+Earned Points Date: 2024-05-10
+Expiry Date: 2024-08-08
+Total Points Earned: 30
+
+User ID: 123
+Earned Points Date: 2024-05-10
+Expiry Date: 2024-08-08
+Total Points Earned: 135
+
+User ID: 12
+Earned Points Date: 2024-05-10
+Expiry Date: 2024-08-08
+Total Points Earned: 150
+
