@@ -15,7 +15,7 @@ import java.util.InputMismatchException;
 // please use Main class under `src/main/` instead of writing another main class
 public class Main {
     public static Scanner scanner = new Scanner(System.in);
-    public static Customer loggedInCustomer = null;
+        public static Customer loggedInCustomer = null;
     
     /*public static void main (String[] args){
        // Get the last customer ID
