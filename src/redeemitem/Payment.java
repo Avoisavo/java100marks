@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.text.DecimalFormat;
 
+// as per discussion, please refer to updated UML diagram or group leader for new transaction policy
 public class Payment {
 
     //DISPLAY CHART FOR USER

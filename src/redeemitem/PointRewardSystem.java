@@ -18,11 +18,12 @@ import java.util.Scanner;
 
 // Main class
 public class PointRewardSystem {
+  // please use Main class under `src/main/` instead of writing another main method
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int trans_ans;
-        int genereport_ans;
-        int repeatgene_ans;
+        int trans_ans; // please use camelCase instead of snake_case
+        int genereport_ans; // please use camelCase instead of snake_case
+        int repeatgene_ans; // please use camelCase instead of snake_case
         boolean contGeneReport = true;
         boolean repeatReport = true;
         boolean contTrans = true;
@@ -72,9 +73,9 @@ public class PointRewardSystem {
         
        
         // Create reports for different loyalty statuses. THIS IS ONLY EXAMPLE WHERE IT COLLECT THE DATA JUST MODIFY IT
-        Report goldReport = new GoldStatusReport(2000 ,5000,200);
-        Report silverReport = new SilverStatusReport(1500,3000,200);
-        Report memberReport = new MemberStatusReport(6500 ,2000,200);
+        Report goldReport = new GoldStatusReport(2000 ,5000,200); // as per discussion, please refer to UML for updated protocol to handling loyalty status
+        Report silverReport = new SilverStatusReport(1500,3000,200); // as per discussion, please refer to UML for updated protocol to handling loyalty status
+        Report memberReport = new MemberStatusReport(6500 ,2000,200); // as per discussion, please refer to UML for updated protocol to handling loyalty status
         Report yearlyRedemptionReport = new RedemptionTrendsReport(6500 ,2000,200);
         Report pointsEarnedReport = new PointsEarnedTrendsReport(1000, 500,200);
         Map<Integer, Integer> yearlyRedeemedAmounts = yearlyRedemptionReport.yearlyRedeemedAmounts;
@@ -97,6 +98,7 @@ public class PointRewardSystem {
                         // Generate member customer report
                         memberReport.generateReport();
                         //Create a loop
+                        // please put this in a method!!! avoid writing unmaintainable code!!!
                         do {
                             try{
                                 //Provide user input and display the output of repeat report options.
@@ -133,6 +135,7 @@ public class PointRewardSystem {
                     case 2:
                         // Generate Silver customer report
                         silverReport.generateReport();
+                        // please put this in a method!!! avoid writing unmaintainable code!!!
                         do {
                             try{
                                 //Provide user input and display the output of repeat report options.
@@ -169,6 +172,8 @@ public class PointRewardSystem {
                     case 3:
                         // Generate Gold customer report
                         goldReport.generateReport();
+
+                        // please put this in a method!!! avoid writing unmaintainable code!!!
                         do {
                             try{
                                 //Provide user input and display the output of repeat report options.
@@ -208,6 +213,7 @@ public class PointRewardSystem {
                         yearlyRedemptionReport.addYearlyRedeemedAmount(2022, 2200);
                         // Generate reports
                         yearlyRedemptionReport.generateReport();
+                        // please put this in a method!!! avoid writing unmaintainable code!!!
                         do {
                             try{
                                 //Provide user input and display the output of repeat report options.
@@ -246,6 +252,8 @@ public class PointRewardSystem {
                         pointsEarnedReport.addPointsEarnedData(2021, 700);
                         // Generating the report
                         pointsEarnedReport.generateReport();
+
+                        // please put this in a method!!! avoid writing unmaintainable code!!!
                         do {
                             try{
                                 //Provide user input and display the output of repeat report options.
@@ -284,6 +292,7 @@ public class PointRewardSystem {
                         break;
                     default:
                         //Display error message when user enter out of range.
+                        // please provide clearer error message to user. Aim to be as specific as possible
                         System.out.print("Something is wrong. Please enter [0-5] only.\n");
                         scanner.nextLine();
                         break;
@@ -297,6 +306,7 @@ public class PointRewardSystem {
            }//the loop will stop when contGeneReport is false
         while(contGeneReport);   
         }       
+  // please format your code!!!
 }
 
 

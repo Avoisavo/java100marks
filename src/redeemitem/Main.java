@@ -1,4 +1,4 @@
-<<<<<<< HEAD:src/customer/Main.java
+<<<<<<< HEAD:src/customer/Main.java // why is there a merge conflict here?
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 
+// please use Main class under `src/main/` instead of writing another main class
 public class Main {
     public static Scanner scanner = new Scanner(System.in);
     public static Customer loggedInCustomer = null;

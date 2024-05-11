@@ -2,6 +2,7 @@ package redeemitem;
 
 import java.util.Scanner;
 
+// please refer to updated UML diagram or group leader regarding this class
 public class RedemptionManager {
     
     private int customer_point; 

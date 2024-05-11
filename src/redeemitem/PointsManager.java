@@ -2,6 +2,7 @@ package redeemitem;
 
 import java.util.ArrayList;
 
+// as per discussion, please refer to UML diagram or group leader regarding updates for this class as it is not needed anymore
 public class PointsManager {
 
     private static ArrayList<String> redeemableItems = new ArrayList<String>();

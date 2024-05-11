@@ -11,6 +11,7 @@ import java.util.Map;
 
 public class EarnedPoints {
 
+  // please use relative file path instead of absolute file paths
     private static final String POINTS_FILE_PATH = "/Users/avo/Documents/GitHub/java100marks/src/data/points_earned.txt";
 
     public static void updatePointsEarned(int userId, int additionalPoints, int totalEarnedPoints) {

@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+// as per discussion on the UML diagram, please put loyaltyStatus as a property under Customer instead of writing a class
 public class LoyaltyStatus extends EarnedPoints {
     private static final String POINTS_FILE_PATH = "/Users/avo/Documents/GitHub/java100marks/src/data/points_earned.txt";
     private String status;

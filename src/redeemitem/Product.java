@@ -6,8 +6,9 @@ import java.util.Scanner;
 
 public class Product {
 
+  // please refer to updated UML diagram for other properties of this class
     private double price;
-    private int pointsEarned;
+    private int pointsEarned; // please refer to updated UML diagram for this property
 
     public Product(double price, int pointsEarned) {
         this.price = price;
@@ -22,6 +23,7 @@ public class Product {
         return pointsEarned;
     }
 
+  // please set this as a static variable in this class and return the static variable in this method
     public static List<Product> getAvailableProducts() {
         List<Product> products = new ArrayList<>();
         products.add(new Product(10.50, 10)); // Example userId

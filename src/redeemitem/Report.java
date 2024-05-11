@@ -31,6 +31,8 @@ public abstract class Report {
     }
 }
 
+// please refer to updated UML diagram or group leader regarding the updated policy of handling loyalty status
+
 // Report for Gold Status
  class GoldStatusReport extends Report {
     // Constructor

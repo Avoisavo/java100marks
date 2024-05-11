@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ShoppingCart {
 
-    private List<Product> selectedProducts;
+    private List<Product> selectedProducts; // please refer to updated UML diagram for this property
 
     public ShoppingCart() {
         this.selectedProducts = new ArrayList<>();

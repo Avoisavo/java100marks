@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+// please refer to updated UML diagram or group leader regarding the use of this class
 // Transaction class
 class Transaction {
     private static int transactionIdCounter = 1; // Counter for auto-generated transaction ID
@@ -71,6 +72,7 @@ abstract class Report {
     public abstract void generateReport();
 }
 
+// as per discussion, please refer to UML diagram for updated policy in handling loyalty status
 // Report for Gold Status
 class GoldStatusReport extends Report {
     // Constructor
@@ -140,6 +142,7 @@ class MemberStatusReport extends Report {
     }
 }
 
+// please use Main class under `src/main/`
 // Main class
 public class PointRewardSystem {
     public static void main(String[] args) {

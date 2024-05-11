@@ -6,15 +6,16 @@ import java.util.Scanner;
 
 public class RedeemFileUtils {
 
-    private static ArrayList<String> redeemableItems = new ArrayList<>();
-    private static ArrayList<Integer> itemCosts = new ArrayList<>();
-    private static ArrayList<Integer> quantity = new ArrayList<>();
-    private static ArrayList<Integer> itemIndices = new ArrayList<>(); // Added for tracking item indices
-    private static int lastAddedItemIndex = 1;
+    private static ArrayList<String> redeemableItems = new ArrayList<>(); // please make this as an array list of Product
+    private static ArrayList<Integer> itemCosts = new ArrayList<>(); // please remove this
+    private static ArrayList<Integer> quantity = new ArrayList<>(); // pleas remove this
+    private static ArrayList<Integer> itemIndices = new ArrayList<>(); // Added for tracking item indices // please remove this
+    private static int lastAddedItemIndex = 1; // please remove this
 
+  // please use relative path instead of absolute path
     private static final String itemList ="/Users/avo/Documents/GitHub/java100marks/src/data/redeemableItems.txt";
 
-    public static void addItems(Scanner scanner) {
+    public static void addItems(Scanner scanner) { // please avoid passing in a "Scanner" as parameter, use the "scanner" under Main class
         int index = lastAddedItemIndex; // Start from the last added item's index
         System.out.println("Please enter the items you want to add. Enter item name, point cost, and quantity. Enter 0 for the item name to stop.");
         while (true) {
@@ -184,6 +185,7 @@ public class RedeemFileUtils {
         }
     }
 
+  // please remove this method
     public static int getItemIndexByName(String itemName) {
          for (int i = 0; i < redeemableItems.size(); i++) {
             if (redeemableItems.get(i).equals(itemName)) {
@@ -193,6 +195,7 @@ public class RedeemFileUtils {
         return -1;
     }
 
+  // please remove this method
     public static String getItemNameByIndex(int index) {
         if (index > 0 && index <= redeemableItems.size()) {
             return redeemableItems.get(index - 1);

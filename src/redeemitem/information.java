@@ -2,6 +2,7 @@ package redeemitem;
 
 import java.util.Scanner;
 
+// please remove this class >:(
 public class information {
 
     public static int getUserId(Scanner scanner) {

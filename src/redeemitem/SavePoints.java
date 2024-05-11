@@ -5,10 +5,12 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+// please refer to updated UML diagram or group leader regarding the use of this class
 public class SavePoints {
 
     private static final String POINTS_FILE_PATH = "/Users/avo/Documents/GitHub/java100marks/src/data/points_earned.txt";
 
+  // please format your code!!!
 public static void savePointsEarned(int userId, LocalDate earningDate, int totalPointsEarned) {
     try (FileWriter writer = new FileWriter(POINTS_FILE_PATH,true)) {
         writer.write("User ID: " + userId + "\n");

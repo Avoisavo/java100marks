@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package customer;
+package customer; // please put it under customer module
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -32,7 +32,9 @@ public class CustomerUpdate {
         updateFile(loggedInCustomer);
     }
      
+  // please format your code!!!!!!!!!!!! >:(
             private static void updateFile(Customer updatedCustomer) {
+    // please use temporary variable instead of temporary file
         // Create a temporary file to hold the updated data
         String tempFileName = "temp_customers.txt";
         try (BufferedReader reader = new BufferedReader(new FileReader("customers.txt"));

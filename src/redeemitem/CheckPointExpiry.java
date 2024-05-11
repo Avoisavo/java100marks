@@ -4,6 +4,7 @@ package redeemitem;
 import java.time.LocalDate;
 import java.time.Period;
 
+// this class is not needed, write it as a method under Customer
 public class CheckPointExpiry {
 
     private int points;
