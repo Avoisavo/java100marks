@@ -144,13 +144,9 @@ class PointsEarnedTrendsReport extends Report {
         super("", totalPointsEarned, totalPointsRedeemed, totalProductRedeemed);
         this.pointsEarnedData = new HashMap<>();
     }
-<<<<<<< Updated upstream
 
-
-=======
     
     // Method to add points earned data for a specific year
->>>>>>> Stashed changes
     public void addPointsEarnedData(int year, int pointsEarned) {
         pointsEarnedData.put(year, pointsEarned);
     }
