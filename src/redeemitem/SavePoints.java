@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
 // please refer to updated UML diagram or group leader regarding the use of this class
 public class SavePoints {
 
+  // please use relative file paths instead of absolute file paths
     private static final String POINTS_FILE_PATH = "/Users/avo/Documents/GitHub/java100marks/src/data/points_earned.txt";
 
   // please format your code!!!
