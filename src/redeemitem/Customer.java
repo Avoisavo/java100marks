@@ -13,12 +13,11 @@ public class Customer {
     private static List<Customer> customers = new ArrayList<>();
     
     //  to get all customers
-  public static List<Customer> getCustomers() {
+    public static List<Customer> getCustomers() {
     // this method no need, "Customers" should have no access to other customers in the system
     // if you want to keep this method, write it so that "Admin" is the only class that uses this method
         return customers;
     }
-
     
     private String id;
     private String name;
@@ -38,6 +37,16 @@ public class Customer {
         this.points = 0;
     }
     
+    // please put all constructors together at the top of the class
+    public Customer(String id, String name, String ic, String phone, int points) {
+    // please format your code >:(
+        this.id = id;
+        this.name = name;
+        this.ic = ic;
+        this.phone = phone;
+        this.points = points;
+    }
+    
     public Customer(String name, String ic){
        this(name,ic,""); 
     }
@@ -46,7 +55,6 @@ public class Customer {
        this(name,"",""); 
     }
     
-
     public String getId() {
         return id;
     }
@@ -72,16 +80,6 @@ public class Customer {
         return customerCount;
     }
     
-  // please put all constructors together at the top of the class
-    public Customer(String id, String name, String ic, String phone, int points) {
-    // please format your code >:(
-    this.id = id;
-    this.name = name;
-    this.ic = ic;
-    this.phone = phone;
-    this.points = points;
-    }
-    
     public void setName(String name) {
         this.name = name;
     }
@@ -90,8 +88,6 @@ public class Customer {
         this.phone = phone;
     }
 
-    
-    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true; // no need this line, just check if name or ic is equal to each other
@@ -99,7 +95,6 @@ public class Customer {
         Customer customer = (Customer) o;
         return name.equals(customer.name) && ic.equals(customer.ic);
     }
-
 
 }
     //end 

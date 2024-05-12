@@ -11,8 +11,7 @@ import java.util.Map;
 
 public class EarnedPoints {
 
-  // please use relative file path instead of absolute file paths
-    private static final String POINTS_FILE_PATH = "C:\\Users\\Jason Paw\\OneDrive - student.tarc.edu.my\\Documents\\GitHub\\java100marks\\src\\data\\points_earned.txt";
+    private static final String POINTS_FILE_PATH = " src/data/points_earned.txt";
 
     public static void updatePointsEarned(int userId, int additionalPoints, int totalEarnedPoints) {
         Map<Integer, Integer> pointsMap = new HashMap<>();

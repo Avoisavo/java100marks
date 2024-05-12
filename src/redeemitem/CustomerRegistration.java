@@ -14,11 +14,11 @@ import java.util.Scanner;
  *
  * @author Linghue Wee
  */
-
-
-        
+       
 public class CustomerRegistration {
+    
     public static Customer createCustomer(){
+        
         boolean isValidCustomer = false;
         Customer customer = null;
         
@@ -31,11 +31,9 @@ public class CustomerRegistration {
             customer = new Customer (name, ic, phone);
             isValidCustomer = CustomerValidation.validateCustomerDetails(customer);
         }
-        return customer;
-        
+        return customer; 
     }
-    
-            
+           
     public static String getInput(String message, String pattern){
         String input;
         boolean isValidInput = false;
@@ -45,7 +43,9 @@ public class CustomerRegistration {
             input = Main.scanner.nextLine();
             if (input.matches(pattern)) {
                 isValidInput = true;
-            } else {
+            } 
+            
+            else {
                 System.out.println("Invalid input! Please enter a valid value.");
             }
         } while (!isValidInput);
@@ -53,22 +53,26 @@ public class CustomerRegistration {
         return input;
     }
     
-    public static void registerCustomer(Customer customer, int newCustomerId) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("customers.txt", true))) {
-            // Format the customer information
-            String customerInfo = String.format("%03d,%s,%s,%s,%d\n", newCustomerId, customer.getName(), customer.getIc(), customer.getPhone(), customer.getPoints());
-            // Write customer information to the file
-            writer.write(customerInfo);
-            System.out.println("Customer information written to file successfully.");
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Failed to write customer information to file.");
-        }
+public static void registerCustomer(Customer customer, int newCustomerId) {
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/data/customers.txt", true))) {
+        // Write customer information to the file
+        writer.write("User ID: " + newCustomerId + "\n");
+        writer.write("User Name: " + customer.getName() + "\n");
+        writer.write("IC: " + customer.getIc() + "\n");
+        writer.write("Phone Number: " + customer.getPhone() + "\n");
+        writer.write("Total Points Earned: " + customer.getPoints() + "\n\n");
+        
+        System.out.println("Customer information written to file successfully.");
+    } catch (IOException e) {
+        e.printStackTrace();
+        System.out.println("Failed to write customer information to file.");
     }
+}
+
     
     public static int getLastCustomerId() {
         int lastCustomerId = 0;
-        try (Scanner fileScanner = new Scanner(new File("customers.txt"))) {
+        try (Scanner fileScanner = new Scanner(new File("src/data/customers.txt"))) {
             while (fileScanner.hasNextLine()) {
                 String line = fileScanner.nextLine();
                 String[] parts = line.split(",");

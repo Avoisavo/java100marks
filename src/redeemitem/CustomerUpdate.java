@@ -16,8 +16,8 @@ import java.io.IOException;
  * @author Linghue Wee
  */
 public class CustomerUpdate {
+    
     public static void updateName(Customer loggedInCustomer) {
-        System.out.print("Enter new name: ");
         String newName = CustomerRegistration.getInput("Enter new name: ", "^[a-zA-Z]+( [a-zA-Z]+)*$");
         loggedInCustomer.setName(newName);
         System.out.println("Name updated successfully!");
@@ -25,21 +25,18 @@ public class CustomerUpdate {
     }
     
     public static void updatePhone(Customer loggedInCustomer) {
-        System.out.print("Enter new phone number: ");
-        String newPhone = CustomerRegistration.getInput("Enter user phone : ","^[0-9]{10}$");
+        String newPhone = CustomerRegistration.getInput("Enter new phone : ","^[0-9]{10}$");
         loggedInCustomer.setPhone(newPhone);
         System.out.println("Phone number updated successfully!");
         updateFile(loggedInCustomer);
     }
      
-  // please format your code!!!!!!!!!!!! >:(
-            private static void updateFile(Customer updatedCustomer) {
+    private static void updateFile(Customer updatedCustomer) {
     // please use temporary variable instead of temporary file
         // Create a temporary file to hold the updated data
         String tempFileName = "temp_customers.txt";
-        try (BufferedReader reader = new BufferedReader(new FileReader("customers.txt"));
-             BufferedWriter writer = new BufferedWriter(new FileWriter(tempFileName))) {
-
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/data/customers.txt"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(tempFileName))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
@@ -49,8 +46,10 @@ public class CustomerUpdate {
                 if (id.equals(updatedCustomer.getId())) {
                     // Write the updated customer details to the temporary file
                     writer.write(updatedCustomer.getId() + "," + updatedCustomer.getName() + "," +
-                            updatedCustomer.getIc() + "," + updatedCustomer.getPhone() + "," + updatedCustomer.getPoints());
-                } else {
+                    updatedCustomer.getIc() + "," + updatedCustomer.getPhone() + "," + updatedCustomer.getPoints());
+                } 
+                
+                else {
                     // Write the unchanged customer details to the temporary file
                     writer.write(line);
                 }
@@ -61,24 +60,25 @@ public class CustomerUpdate {
         }
 
         // Replace the original file with the temporary file
-        File originalFile = new File("customers.txt");
+        File originalFile = new File("src/data/customers.txt");
         File tempFile = new File(tempFileName);
         if (tempFile.exists()) {
             if (originalFile.delete()) {
                 if (tempFile.renameTo(originalFile)) {
                     System.out.println("File updated successfully.");
-                } else {
+                } 
+                else {
                     System.out.println("Failed to rename temporary file.");
                 }
-            } else {
+            } 
+            else {
                 System.out.println("Failed to delete original file.");
             }
-        } else {
+        } 
+        else {
             System.out.println("Temporary file does not exist.");
         }
     }
-
-
 }
 
     

@@ -14,7 +14,7 @@ public class RedeemFileUtils {
     private static final String itemList = "redeemableItems.txt";
     private static int lastAddedItemIndex = 1;
 
-    public static void addItems() {
+    public static void addItems(Scanner scanner) {
         int index = lastAddedItemIndex; // Start from the last added item's index
         System.out.println("Please enter the items you want to add. Enter item name, point cost, and quantity. Enter 0 for the item name to stop.");
         while (true) {
@@ -100,7 +100,7 @@ public class RedeemFileUtils {
         lastAddedItemIndex = 1;
     }
 
-    public static void deleteItem() {
+    public static void deleteItem(Scanner scanner) {
         System.out.println("Enter the index of the item you want to delete:");
         int indexToDelete = scanner.nextInt();
         scanner.nextLine(); // Consume the newline left-over

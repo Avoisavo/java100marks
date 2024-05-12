@@ -12,7 +12,6 @@ import java.util.Random;
 public class RedemptionManager {
 
     public void redeemItems(int selectedIndex, int quantity, int userId) {
-        int customer_point = RetrivePoints.getTotalPointsEarned(userId);
         int totalPoints = PointsManager.deductPoints(selectedIndex - 1, quantity, customer_point, userId);
 
         String itemName = RedeemFileUtils.getRedeemableItems().get(selectedIndex - 1);

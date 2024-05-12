@@ -1,83 +1,69 @@
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- *//*
-package customer;
+package redeemitem;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
+import java.time.LocalDate;
 import java.util.InputMismatchException;
 
-// please use Main class under `src/main/` instead of writing another main class
+
 public class Main {
+
     public static Scanner scanner = new Scanner(System.in);
-        public static Customer loggedInCustomer = null;
+    private static Customer loggedInCustomer;
+    private static int loggedInUserId;
     
-    public static void main (String[] args){
-       // Get the last customer ID
-        int lastCustomerId = CustomerRegistration.getLastCustomerId();
-
-        // Increment the last customer ID to generate the next available ID
-        int newCustomerId = lastCustomerId + 1;
-
-        Customer customer = CustomerRegistration.createCustomer();
-        System.out.println("Customer created: " + customer);
-
-        // Register the new customer with the new customer ID
-        CustomerRegistration.registerCustomer(customer, newCustomerId);
-      
-        // Close scanner and end program
-        endProgram();
-    }
-    
-    public static void endProgram(){
-        scanner.close();
-        System.out.println("end");
-    }
-   
-}*/
-   /* 
     public static void main(String[] args) {
-            boolean exit = false;
+        int choice;
+         do {
+            System.out.println("================================");
+            System.out.println("Welcome to Loyalty Program Menu");
+            System.out.println("================================");
+            System.out.println("1. Register");
+            System.out.println("2. Login");
+            System.out.println("3. Update Info");
+            System.out.println("4. Earned Point");
+            System.out.println("5. Redeem Points");
+            System.out.println("6. Check Loyalty");
+            System.out.println("7. Report");
+            System.out.println("8. Exit");
+            System.out.println("================================");
+            System.out.print("Enter your choice: ");
+            choice = scanner.nextInt();
 
-            while (!exit) {
-                System.out.println("Welcome to the Customer Management System!");
-                System.out.println("1. Register a new customer");
-                System.out.println("2. Log in");
-                System.out.println("3. Update customer information");
-                System.out.println("4. Exit");
-                System.out.print("Please choose an option: ");
-
-                int choice = getIntInput();
-
-                switch (choice) {
-                    case 1:
-                        registerCustomer();
-                        break;
-                    case 2:
-                        logIn();
-                        break;
-                    case 3:
-                        updateCustomer();
-                        break;
-                    case 4:
-                        exit = true;
-                        break;
-                    default:
-                        System.out.println("Invalid option! Please choose a valid option.");
-                }
+            switch (choice) {
+                case 1:
+                    registerCustomer();
+                    break;
+                case 2:
+                    logIn();
+                    break;
+                case 3:
+                    updateCustomer();
+                    break;
+                case 4:
+                    earnedPoint();
+                    break;
+                case 5:
+                    redeemPoints();
+                    break;
+                case 6:
+                    checkLoyalty();
+                    break;
+                case 7:
+                    report();
+                    break;
+                case 8:
+                    System.out.println("Exiting Loyalty Program. Goodbye!");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please enter a number between 1 and 5.");
             }
-        
-        // Close scanner and end program
-        endProgram();
+        } while (choice != 6);
+        scanner.close();
     }
     
-    
-        public static void endProgram() {
+    public static void endProgram() {
             scanner.close();
             System.out.println("Program ended.");
         }
@@ -99,7 +85,7 @@ public class Main {
         // Increment the last customer ID to generate the next available ID
         int newCustomerId = lastCustomerId + 1;
         Customer customer = CustomerRegistration.createCustomer();
-        System.out.println("Customer created: " + customer);
+        System.out.println("Customer created: ");
         // Add the customer to the list of customers
         CustomerRegistration.addCustomer(customer);
         // Register the new customer with the new customer ID
@@ -107,22 +93,20 @@ public class Main {
     }
     
     public static void logIn() {
-    Customer loggedInCustomer = CustomerLogin.logInCustomer();
-    if (loggedInCustomer != null) {
-        System.out.println("Logged in successfully!");
-        // Set the logged-in customer
-        Main.loggedInCustomer = loggedInCustomer;
-
-        // Print the details of the logged-in customer
-        System.out.println("Customer details:");
-        System.out.println("Name: " + loggedInCustomer.getName());
-        System.out.println("IC: " + loggedInCustomer.getIc());
-        System.out.println("Phone: " + loggedInCustomer.getPhone());
-        System.out.println("Points: " + loggedInCustomer.getPoints());
-    } else {
-        System.out.println("Login failed. Please try again.");
+        Customer loggedInCustomer = CustomerLogin.logInCustomer();
+        if (loggedInCustomer != null) {
+            System.out.println("Logged in successfully!");
+            // Set the logged-in customer
+            Main.loggedInCustomer = loggedInCustomer;
+            System.out.println("Customer details:");
+            System.out.println("Name: " + loggedInCustomer.getName());
+            System.out.println("IC: " + loggedInCustomer.getIc());
+            System.out.println("Phone: " + loggedInCustomer.getPhone());
+            System.out.println("Points: " + loggedInCustomer.getPoints());
+        } else {
+            System.out.println("Login failed. Please try again.");
+        }
     }
-}
     
     public static void updateCustomer() {
         if (loggedInCustomer == null) {
@@ -155,70 +139,13 @@ public class Main {
             }
         }
     }
-}
-*/
-   
-
-package redeemitem;
-
-import java.util.List;
-import java.util.Scanner;
-import java.time.LocalDate;
-
-public class Main {
-
-    public static Scanner scanner = new Scanner(System.in);
-
-    public static void main(String[] args) {
-        int choice;
-        do {
-            System.out.println("================================");
-            System.out.println("Welcome to Loyalty Program Menu");
-            System.out.println("================================");
-            System.out.println("1. Register");
-            System.out.println("2. Earned Point");
-            System.out.println("3. Redeem Points");
-            System.out.println("4. Check Loyalty");
-            System.out.println("5. Report");
-            System.out.println("6. Exit");
-            System.out.println("================================");
-            System.out.print("Enter your choice: ");
-            choice = scanner.nextInt();
-
-            switch (choice) {
-                case 1:
-                    register();
-                    break;
-                case 2:
-                    earnedPoint();
-                    break;
-                case 3:
-                    redeemPoints();
-                    break;
-                case 4:
-                    checkLoyalty();
-                    break;
-                case 5:
-                    report();
-                    break;
-                case 6:
-                    System.out.println("Exiting Loyalty Program. Goodbye!");
-                    break;
-                default:
-                    System.out.println("Invalid choice. Please enter a number between 1 and 5.");
-            }
-        } while (choice != 6);
-
-        scanner.close();
-    }
-    public static void register() {
-        System.out.println("You have selected Register.");
-        // Add your registration logic here
-    }
 
     public static void earnedPoint() {
+        if (loggedInUserId == 0) {
+            System.out.println("Please log in first.");
+            return;
+        }
         System.out.println("You have selected Earned Point.");
-        int userId = information.getUserId(Main.scanner);
         List<Product> availableProducts = Product.getAvailableProducts();
         ShoppingCart cart = new ShoppingCart();
         List<Product> selectedProducts = Product.selectProducts(scanner);
@@ -226,21 +153,16 @@ public class Main {
             cart.addToCart(product);
         }
         Payment.displayCartContents(cart);
-
         // Make payment
         if (Payment.makePayment(scanner)) {
             int totalPointsEarned = cart.calculateTotalPointsEarned();
             LocalDate earningDate = LocalDate.now(); // Get current date
-
             //SAVE POINTS
-            SavePoints.savePointsEarned(userId, earningDate, totalPointsEarned);
 
-            // RETRIVE POINTS
-            int totalEarnedPoints = RetrivePoints.getTotalPointsEarned(userId);
-            System.out.println("Total points earned by user: " + totalEarnedPoints);
+            // RETRIEVE POINTS
 
-            //UPDATE POINTS
-            EarnedPoints.updatePointsEarned(userId, totalPointsEarned, totalEarnedPoints);
+            // UPDATE POINTS
+
         }
     }
 
