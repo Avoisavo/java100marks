@@ -18,7 +18,6 @@ import java.util.Scanner;
 
 // Main class
 public class PointRewardSystem {
-  // please use Main class under `src/main/` instead of writing another main method
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int trans_ans;
@@ -31,64 +30,13 @@ public class PointRewardSystem {
         boolean contTrans = true;
         boolean contaskadmin = true;
         
-        
-        /*
-        // Create some Transaction objects  THIS IS THE EXAMPLE WHERE IT COLLECT THE DATA BELOW. JUST MODIFY IT
-        Transaction transaction1 = new Transaction("John Doe", 100, "Purchase");
-        Transaction transaction2 = new Transaction("Jane Smith", 150, "Redemption");
-        Transaction transaction3 = new Transaction("Alice Johnson", 200, "Purchase");
-        List<Transaction> transactions = new ArrayList<>();
-        transactions.add(transaction1);
-        transactions.add(transaction2);
-        transactions.add(transaction3);
-        
-        //Create a loop
-        do{
-            try{
-                //Provide user input and display the output for transaction history checking option.
-                System.out.print("Do you want to check transaction history?[Yes=(1)/No=(0)]: ");
-                trans_ans = scanner.nextInt();
-                if (trans_ans == 1){
-                    //When user want to check transaction history 
-                    //Display the transaction history
-                    Transaction.displayTransactions(transactions);
-                    //Stop the loop
-                    contTrans = false;
-                }
-                else if (trans_ans == 0 ){
-                    //When user do not want to check transaction history and stop loop
-                    contTrans = false;
-                }
-                else{
-                //When user enter the wrong input. Generate wrong messsage 
-                System.out.print("Oops! Something is wrong.Please enter 1 or 0 again.\n");
-                scanner.nextLine();
-                }
-            }
-            //When user enter alphablet which is wrong input. Generate wrong message.
-            catch(Exception ex){
-                System.out.print("Oops! Something is wrong.Please enter 1 or 0 again.\n");
-                scanner.nextLine();
-            }
-         //the loop will stop when conTrans is false.   
-        }while (contTrans);
-        */
-        
-       
         // Create reports for different loyalty statuses. THIS IS ONLY EXAMPLE WHERE IT COLLECT THE DATA JUST MODIFY IT
-        
-        Report goldReport = new GoldStatusReport(2000 ,5000,200);
-        Report silverReport = new SilverStatusReport(1500,3000,200);
-        Report classicReport = new ClassicStatusReport(6500 ,2000,200);
-
-        Report yearlyRedemptionReport = new RedemptionTrendsReport(6500 ,2000,200);
-        Report pointsEarnedReport = new PointsEarnedTrendsReport(1000, 500,200);
-        Map<Integer, Integer> yearlyRedeemedAmounts = yearlyRedemptionReport.yearlyRedeemedAmounts;
-        for (Map.Entry<Integer, Integer> entry : yearlyRedeemedAmounts.entrySet()) {
-            int year = entry.getKey();
-            int redeemedAmount = entry.getValue();
-            System.out.println("Year: " + year + ", Redeemed Amount: $" + redeemedAmount);
-        }
+        /**/
+        Report goldReport = new GoldStatusReport(5000,200);
+        Report silverReport = new SilverStatusReport(1500,200);
+        Report classicReport = new ClassicStatusReport(6500 ,200);
+        Report pointsEarnedReport = new PointsEarnedTrendsReport(1000,200);
+      
 
         do{
             try{
@@ -112,7 +60,7 @@ public class PointRewardSystem {
             do{
                 try{
                     //Provide user input and display the output of report menu.
-                    System.out.print("\n-------------------------------------------------------\nWhich report do you want to look?\n-------------------------------------------------------\n(1) Overall Member Customer Yearly Report  \n(2) Overall Silver Customer Yearly Report \n(3) Overall Gold Customer Yearly Report   \n(4) Yearly Redemption Report  \n(5) Yearly Points Earned \n(0) Cancel\nPlease enter in the range[0 to 5]: ");
+                    System.out.print("\n-------------------------------------------------------\nWhich report do you want to look?\n-------------------------------------------------------\n(1) Overall Member Customer Yearly Report  \n(2) Overall Silver Customer Yearly Report \n(3) Overall Gold Customer Yearly Report  \n(4) Yearly Total Points Earned \n(0) Cancel\nPlease enter in the range[0 to 5]: ");
                     genereport_ans = scanner.nextInt();
 
                     switch (genereport_ans) {
@@ -225,45 +173,6 @@ public class PointRewardSystem {
                             }while(repeatReport);
                             break;
                         case 4:
-                            // Add yearly redeemed amounts THIS IS ONLY EXAMPLE WHERE IT COLLECT THE DATA JUST MODIFY IT
-                            yearlyRedemptionReport.addYearlyRedeemedAmount(2020, 1500);
-                            yearlyRedemptionReport.addYearlyRedeemedAmount(2021, 1800);
-                            yearlyRedemptionReport.addYearlyRedeemedAmount(2022, 2200);
-                            // Generate reports
-                            yearlyRedemptionReport.generateReport();
-                            do {
-                                try{
-                                    //Provide user input and display the output of repeat report options.
-                                    System.out.print("Do you want to look at report again?[Yes=(1)/No=(0)]: ");
-                                    repeatgene_ans = scanner.nextInt();
-                                    //When user want to look at report again
-                                    //Display report menu again.
-                                    if(repeatgene_ans == 1){
-                                        //stop the loop
-                                        repeatReport = false;
-                                    }
-                                    //When user does not want to look at report again
-                                    else if(repeatgene_ans == 0){
-                                        //stop all the loop
-                                        repeatReport = false;
-                                        contGeneReport = false;
-                                    }
-                                    else{
-                                        //When user enter out of the range of 1 to 0, display the error message.
-                                        System.out.print("Error input. Please try enter 1 or 0 only.\n");
-                                        scanner.nextLine();
-                                        repeatReport = true;}
-                                }
-                                //When user is not enter number input, display the error message.
-                                catch(Exception ex){
-                                    System.out.print("Error input. Please try enter 1 or 0 only.\n");
-                                    scanner.nextLine();
-                                    repeatReport = true;
-                                }
-                            }//Stop the loop when repeatReport is false.
-                            while(repeatReport);
-                            break;
-                        case 5:
                             // Adding points earned data for each year THIS IS ONLY EXAMPLE WHERE IT COLLECT THE DATA JUST MODIFY IT
                             pointsEarnedReport.addPointsEarnedData(2020, 500);
                             pointsEarnedReport.addPointsEarnedData(2021, 700);

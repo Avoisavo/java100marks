@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 
-package customer; // please put it under "customer" module
+package redeemitem; // please put it under "customer" module
 
 import java.util.ArrayList;
 import java.util.List;

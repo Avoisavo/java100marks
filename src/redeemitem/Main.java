@@ -1,8 +1,8 @@
-<<<<<<< HEAD:src/customer/Main.java // why is there a merge conflict here?
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+ *//*
 package customer;
 
 import java.io.BufferedWriter;
@@ -17,7 +17,7 @@ public class Main {
     public static Scanner scanner = new Scanner(System.in);
         public static Customer loggedInCustomer = null;
     
-    /*public static void main (String[] args){
+    public static void main (String[] args){
        // Get the last customer ID
         int lastCustomerId = CustomerRegistration.getLastCustomerId();
 
@@ -40,7 +40,7 @@ public class Main {
     }
    
 }*/
-    
+   /* 
     public static void main(String[] args) {
             boolean exit = false;
 
@@ -156,9 +156,9 @@ public class Main {
         }
     }
 }
-
+*/
    
-=======
+
 package redeemitem;
 
 import java.util.List;
@@ -354,19 +354,215 @@ public class Main {
  
     }
     public static void report(){
-        System.out.println("You have selected  Loyalty.");
-        //instance
-        Report goldReport = new GoldStatusReport(1000, 500, 10);
-        Report silverReport = new SilverStatusReport(800, 400, 8);
-        Report memberReport = new MemberStatusReport(600, 300, 6);
-        Report redemptionTrendsReport = new RedemptionTrendsReport(0, 0, 0);
-        Report pointsEarnedTrendsReport = new PointsEarnedTrendsReport(0, 0, 0);
+        Scanner scanner = new Scanner(System.in);
+        int trans_ans;
+        int genereport_ans;
+        int repeatgene_ans;
+        int askadmin_ans;
 
-        goldReport.generateReport();
-        silverReport.generateReport();
-        memberReport.generateReport();
-        redemptionTrendsReport.generateReport();
-        pointsEarnedTrendsReport.generateReport();
+        boolean contGeneReport = true;
+        boolean repeatReport = true;
+        boolean contTrans = true;
+        boolean contaskadmin = true;
+        
+        // Create reports for different loyalty statuses. THIS IS ONLY EXAMPLE WHERE IT COLLECT THE DATA JUST MODIFY IT
+        /**/
+        Report goldReport = new GoldStatusReport(5000,200);
+        Report silverReport = new SilverStatusReport(1500,200);
+        Report classicReport = new ClassicStatusReport(6500 ,200);
+        Report pointsEarnedReport = new PointsEarnedTrendsReport(1000,200);
+      
+
+        do{
+            try{
+                    //Provide user input and display the output of report menu.
+                    System.out.print("Please enter your admin password: ");
+                    genereport_ans = scanner.nextInt();
+                    if (genereport_ans == 1234){
+                        contaskadmin = false;
+                    }else{
+                        System.out.println("Oops is wrong password. Please try again.\n");
+                    }
+            }
+            catch(Exception ex){
+                    System.out.println("Oops is wrong password. Please try again.\n");
+                    scanner.nextLine();
+                    }
+            
+            }while(contaskadmin);
+        
+            //Create a loop     
+            do{
+                try{
+                    //Provide user input and display the output of report menu.
+                    System.out.print("\n-------------------------------------------------------\nWhich report do you want to look?\n-------------------------------------------------------\n(1) Overall Member Customer Yearly Report  \n(2) Overall Silver Customer Yearly Report \n(3) Overall Gold Customer Yearly Report  \n(4) Yearly Total Points Earned \n(0) Cancel\nPlease enter in the range[0 to 5]: ");
+                    genereport_ans = scanner.nextInt();
+
+                    switch (genereport_ans) {
+                        case 1:
+                            // Generate member customer report
+                            classicReport.generateReport();
+                            //Create a loop
+                            do {
+                                try{
+                                    //Provide user input and display the output of repeat report options.
+                                    System.out.print("Do you want to look at report again?[Yes=(1)/No=(0)]: ");
+                                    repeatgene_ans = scanner.nextInt();
+                                    //When user want to look at report again
+                                    //Display report menu again.
+                                    if(repeatgene_ans == 1){
+                                        //stop the loop
+                                        repeatReport = false;
+                                    }
+                                    //When user does not want to look at report again
+                                    else if(repeatgene_ans == 0){
+                                        //stop all the loop
+                                        repeatReport = false;
+                                        contGeneReport = false;
+                                    }
+                                    else{
+                                        //When user enter out of the range of 1 to 0, display the error message.
+                                        System.out.print("Error input. Please try enter 1 or 0 only.\n");
+                                        scanner.nextLine();
+                                        repeatReport = true;}
+                                }
+                                //When user is not enter number input, display the error message.
+                                catch(Exception ex){
+                                    System.out.print("Error input. Please try enter 1 or 0 only.\n");
+                                    scanner.nextLine();
+                                    repeatReport = true;
+                                }
+
+                            }//Stop the loop when repeatReport is false.
+                            while(repeatReport);
+                            break;
+                        case 2:
+                            // Generate Silver customer report
+                            silverReport.generateReport();
+                            do {
+                                try{
+                                    //Provide user input and display the output of repeat report options.
+                                    System.out.print("Do you want to look at report again?[Yes=(1)/No=(0)]: ");
+                                    repeatgene_ans = scanner.nextInt();
+                                    //When user want to look at report again
+                                    //Display report menu again.
+                                    if(repeatgene_ans == 1){
+                                        //stop the loop
+                                        repeatReport = false;
+                                    }
+                                    //When user does not want to look at report again
+                                    else if(repeatgene_ans == 0){
+                                        //stop all the loop
+                                        repeatReport = false;
+                                        contGeneReport = false;
+                                    }
+                                    else{
+                                        //When user enter out of the range of 1 to 0, display the error message.
+                                        System.out.print("Error input. Please try enter 1 or 0 only.\n");
+                                        scanner.nextLine();
+                                        repeatReport = true;}
+                                }
+                                //When user is not enter number input, display the error message.
+                                catch(Exception ex){
+                                    System.out.print("Error input. Please try enter 1 or 0 only.\n");
+                                    scanner.nextLine();
+                                    repeatReport = true;
+                                }
+
+                            }//Stop the loop when repeatReport is false.
+                            while(repeatReport);
+                            break;
+                        case 3:
+                            // Generate Gold customer report
+                            goldReport.generateReport();
+                            do {
+                                try{
+                                    //Provide user input and display the output of repeat report options.
+                                    System.out.print("Do you want to look at report again?[Yes=(1)/No=(0)]: ");
+                                    repeatgene_ans = scanner.nextInt();
+                                    //When user want to look at report again
+                                    //Display report menu again.
+                                    if(repeatgene_ans == 1){
+                                        //stop the loop
+                                        repeatReport = false;
+                                    }
+                                    //When user does not want to look at report again
+                                    else if(repeatgene_ans == 0){
+                                        //stop all the loop
+                                        repeatReport = false;
+                                        contGeneReport = false;
+                                    }
+                                    else{
+                                        //When user enter out of the range of 1 to 0, display the error message.
+                                        System.out.print("Error input. Please try enter 1 or 0 only.\n");
+                                        scanner.nextLine();
+                                        repeatReport = true;}
+                                }
+                                //When user is not enter number input, display the error message.
+                                catch(Exception ex){
+                                    System.out.print("Error input. Please try enter 1 or 0 only.\n");
+                                    scanner.nextLine();
+                                    repeatReport = true;
+                                }
+
+                            }while(repeatReport);
+                            break;
+                        case 4:
+                            // Adding points earned data for each year THIS IS ONLY EXAMPLE WHERE IT COLLECT THE DATA JUST MODIFY IT
+                            pointsEarnedReport.addPointsEarnedData(2020, 500);
+                            pointsEarnedReport.addPointsEarnedData(2021, 700);
+                            // Generating the report
+                            pointsEarnedReport.generateReport();
+                            do {
+                                try{
+                                    //Provide user input and display the output of repeat report options.
+                                    System.out.print("Do you want to look at report again?[Yes=(1)/No=(0)]: ");
+                                    repeatgene_ans = scanner.nextInt();
+                                    //When user want to look at report again
+                                    //Display report menu again.
+                                    if(repeatgene_ans == 1){
+                                        //stop the loop
+                                        repeatReport = false;
+                                    }
+                                    //When user does not want to look at report again
+                                    else if(repeatgene_ans == 0){
+                                        //stop all the loop
+                                        repeatReport = false;
+                                        contGeneReport = false;
+                                    }
+                                    else{
+                                        //When user enter out of the range of 1 to 0, display the error message.
+                                        System.out.print("Error input. Please try enter 1 or 0 only.\n");
+                                        scanner.nextLine();
+                                        repeatReport = true;}
+                                }
+                                //When user is not enter number input, display the error message.
+                                catch(Exception ex){
+                                    System.out.print("Error input. Please try enter 1 or 0 only.\n");
+                                    scanner.nextLine();
+                                    repeatReport = true;
+                                }
+
+                            }//Stop the loop when repeatReport is false.
+                            while(repeatReport);
+                            break;
+                        case 0:
+                            contGeneReport = false;
+                            break;
+                        default:
+                            //Display error message when user enter out of range.
+                            System.out.print("Something is wrong. Please enter [0-5] only.\n");
+                            scanner.nextLine();
+                            break;
+                    }
+                    }
+                //when user enter wrong input that is not number.
+                catch(Exception ex){
+                     System.out.print("Oops is wrong. Please try again.\n");
+                     scanner.nextLine();
+                     }
+               }//the loop will stop when contGeneReport is false
+            while(contGeneReport);
     }
 }
->>>>>>> fd943f2f01096047ee66f186c76fe189bc0114ee:src/redeemitem/Main.java
+
