@@ -1,5 +1,8 @@
 package redeemitem;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.regex.Pattern;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -13,6 +16,7 @@ public class RedemptionManager {
         int totalPoints = PointsManager.deductPoints(selectedIndex - 1, quantity, customer_point, userId);
 
         String itemName = RedeemFileUtils.getRedeemableItems().get(selectedIndex - 1);
+        int quantityRedeemed = quantity;
 
         // Generate a random redemption transaction Id
         int transactionId = generateTransactionId();
@@ -23,7 +27,7 @@ public class RedemptionManager {
         String redemptionDate = dateFormat.format(currentDate);
 
         // Save redemption details to file
-        saveRedemptionDetails(userId, transactionId, totalPoints, redemptionDate, itemName);
+        saveRedemptionDetails(userId, transactionId, totalPoints, redemptionDate, itemName, quantityRedeemed);
     }
 
     private int generateTransactionId() {
@@ -31,13 +35,14 @@ public class RedemptionManager {
         return random.nextInt(1000000); // You can adjust the range as needed
     }
 
-    private void saveRedemptionDetails(int userId, int transactionId, int totalPoints, String redemptionDate, String itemName) {
+    private void saveRedemptionDetails(int userId, int transactionId, int totalPoints, String redemptionDate, String itemName, int quantityRedeemed) {
         try {
             FileWriter writer = new FileWriter("redemptionDetails.txt", true); // Append mode
-            writer.write("User ID: " + userId + ", Transaction ID: " + transactionId + ", Redeemed Item: " + itemName + ", Total Points Redeemed: " + totalPoints + ", Redemption Date: " + redemptionDate + "\n");
+            writer.write("User ID: " + userId + ", Transaction ID: " + transactionId + ", Redeemed Item: " + itemName + ", Total Points Redeemed: " + totalPoints + ", Quantity Redeemed: " + quantityRedeemed + ", Redemption Date: " + redemptionDate + "\n");
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 }

@@ -6,16 +6,15 @@ import java.util.Scanner;
 
 public class RedeemFileUtils {
 
-    private static ArrayList<String> redeemableItems = new ArrayList<>(); // please make this as an array list of Product
-    private static ArrayList<Integer> itemCosts = new ArrayList<>(); // please remove this
-    private static ArrayList<Integer> quantity = new ArrayList<>(); // pleas remove this
-    private static ArrayList<Integer> itemIndices = new ArrayList<>(); // Added for tracking item indices // please remove this
-    private static int lastAddedItemIndex = 1; // please remove this
+    private static ArrayList<String> redeemableItems = new ArrayList<>();
+    private static ArrayList<Integer> itemCosts = new ArrayList<>();
+    private static ArrayList<Integer> quantity = new ArrayList<>();
+    private static ArrayList<Integer> itemIndices = new ArrayList<>(); // Added for tracking item indices
+    private static Scanner scanner = new Scanner(System.in);
+    private static final String itemList = "redeemableItems.txt";
+    private static int lastAddedItemIndex = 1;
 
-  // please use relative path instead of absolute path
-    private static final String itemList ="/Users/avo/Documents/GitHub/java100marks/src/data/redeemableItems.txt";
-
-    public static void addItems(Scanner scanner) { // please avoid passing in a "Scanner" as parameter, use the "scanner" under Main class
+    public static void addItems() {
         int index = lastAddedItemIndex; // Start from the last added item's index
         System.out.println("Please enter the items you want to add. Enter item name, point cost, and quantity. Enter 0 for the item name to stop.");
         while (true) {
@@ -101,7 +100,7 @@ public class RedeemFileUtils {
         lastAddedItemIndex = 1;
     }
 
-    public static void deleteItem(Scanner scanner) {
+    public static void deleteItem() {
         System.out.println("Enter the index of the item you want to delete:");
         int indexToDelete = scanner.nextInt();
         scanner.nextLine(); // Consume the newline left-over
@@ -185,9 +184,8 @@ public class RedeemFileUtils {
         }
     }
 
-  // please remove this method
     public static int getItemIndexByName(String itemName) {
-         for (int i = 0; i < redeemableItems.size(); i++) {
+        for (int i = 0; i < redeemableItems.size(); i++) {
             if (redeemableItems.get(i).equals(itemName)) {
                 return itemIndices.get(i);
             }
@@ -195,11 +193,55 @@ public class RedeemFileUtils {
         return -1;
     }
 
-  // please remove this method
     public static String getItemNameByIndex(int index) {
         if (index > 0 && index <= redeemableItems.size()) {
             return redeemableItems.get(index - 1);
         }
         return null;
     }
+
+    public static String getItemName(int userId) {
+        String itemName = "";
+        try (BufferedReader reader = new BufferedReader(new FileReader("redemptionDetails.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (line.contains("User ID: " + userId)) {
+                    String[] parts = line.split(", ");
+                    for (String part : parts) {
+                        if (part.startsWith("Redeemed Item: ")) {
+                            itemName = part.substring("Redeemed Item: ".length());
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return itemName;
+    }
+
+    public static int getQuantityRedeemed(int userId) {
+        int quantityRedeemed = 0;
+        try (BufferedReader reader = new BufferedReader(new FileReader("redemptionDetails.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (line.contains("User ID: " + userId)) {
+                    String[] parts = line.split(", ");
+                    for (String part : parts) {
+                        if (part.startsWith("Quantity Redeemed: ")) {
+                            quantityRedeemed = Integer.parseInt(part.substring("Quantity Redeemed: ".length()));
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+        } catch (IOException | NumberFormatException e) {
+            e.printStackTrace();
+        }
+        return quantityRedeemed;
+    }
+
 }
