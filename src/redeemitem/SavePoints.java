@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 public class SavePoints {
 
   // please use relative file paths instead of absolute file paths
-    private static final String POINTS_FILE_PATH = "/Users/avo/Documents/GitHub/java100marks/src/data/points_earned.txt";
+    private static final String POINTS_FILE_PATH = "C:\\Users\\Jason Paw\\OneDrive - student.tarc.edu.my\\Documents\\GitHub\\java100marks\\src\\data\\points_earned.txt";
 
   // please format your code!!!
 public static void savePointsEarned(int userId, LocalDate earningDate, int totalPointsEarned) {
