@@ -1,27 +1,37 @@
 package redeemitem;
 
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
 public abstract class Report {
-    protected String loyaltyStatus;
-    protected int totalPointsEarned;
-    protected int totalProductRedeemed;
-    protected Map<Integer, Integer> yearlyRedeemedAmounts;
-    protected Map<Integer, Integer> pointsEarnedData;
-    
-    public Report(String loyaltyStatus, int totalPointsEarned,int totalProductRedeemed) {
-        this.loyaltyStatus = loyaltyStatus;
-        this.totalPointsEarned = totalPointsEarned;
-        this.totalProductRedeemed = totalProductRedeemed;
-        this.yearlyRedeemedAmounts = new HashMap<>();
-    }
-    
-    public abstract void generateReport();
+   public Map<String, Integer> redeemedItemsCount = new HashMap<>();
+   public Map<LocalDate, Integer> redemptionPerDay = new HashMap<>();
+   Map<String, Integer> redeemedItemsQuantity = new HashMap<>();
+   public int totalPointsRedeemed = 0;
+   
+   public abstract void generateReport();
+   
+   
+   public void fetchRedemptionData(){
+        try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\Jason Paw\\OneDrive - student.tarc.edu.my\\Documents\\GitHub\\java100marks\\src\\data\\redemptionDetails.txt"))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split(", ");
+                    String redeemedItem = parts[2].substring(parts[2].indexOf(":") + 2);
+                    int pointsRedeemed = Integer.parseInt(parts[3].substring(parts[3].indexOf(":") + 2));
 
-    void addPointsEarnedData(int i, int i0) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                    redeemedItemsCount.put(redeemedItem, redeemedItemsCount.getOrDefault(redeemedItem, 0) + 1);
+                    totalPointsRedeemed += pointsRedeemed;
+                }
+            } 
+        catch (IOException e) {
+                System.err.println("Error occurred while reading redeem_data.txt: " + e.getMessage());
+            }
     }
 }
 
@@ -29,11 +39,7 @@ public abstract class Report {
 
 // Report for Gold Status
  class GoldStatusReport extends Report {
-    // Constructor
-    public GoldStatusReport( int totalPointsEarned,int totalProductRedeemed) {
-        super("Gold", totalPointsEarned,totalProductRedeemed);
-    }
-    
+   
     // Override generateReport method
     @Override
     public void generateReport() {
@@ -44,7 +50,7 @@ public abstract class Report {
         System.out.println("---------------------------------------------------------");
         // Simulated data for each year
         for (int year = 2020; year <= 2021; year++) {
-            System.out.println("|"+year + "\t|$" + totalPointsEarned+"\t\t\t|"+totalProductRedeemed+"\t\t\t|");
+            System.out.println("|"+year + "\t|$" + totalPointsRedeemed+"\t\t\t|"+totalPointsRedeemed+"\t\t\t|");
         }
         System.out.println("---------------------------------------------------------");
     }
@@ -53,11 +59,6 @@ public abstract class Report {
 // Report for Silver Status
  class SilverStatusReport extends Report {
     
-    // Constructor
-    public SilverStatusReport( int totalPointsEarned,int totalProductRedeemed) {
-        super("Silver", totalPointsEarned,totalProductRedeemed);
-    }
-
     // Override generateReport method
     @Override
     public void generateReport() {
@@ -68,7 +69,7 @@ public abstract class Report {
         System.out.println("---------------------------------------------------------");
         // Simulated data for each year
         for (int year = 2020; year <= 2021; year++) {
-            System.out.println("|"+year + "\t|$" + totalPointsEarned+"\t\t\t|"+totalProductRedeemed+"\t\t\t|");
+            System.out.println("|"+year + "\t|$" + totalPointsRedeemed+"\t\t\t|"+totalPointsRedeemed+"\t\t\t|");
         }
         System.out.println("---------------------------------------------------------");
     }
@@ -76,10 +77,6 @@ public abstract class Report {
 
 // Report for Member Status
  class ClassicStatusReport extends Report {
-    // Constructor
-    public ClassicStatusReport (int totalPointsEarned,int totalProductRedeemed) {
-        super("Member", totalPointsEarned,totalProductRedeemed);
-    }
 
     // Override generateReport method
     @Override
@@ -91,43 +88,41 @@ public abstract class Report {
         System.out.println("-----------------------------------------------------------");
         // Simulated data for each year
         for (int year = 2020; year <= 2021; year++) {
-            System.out.println("|"+year + "\t|$" + totalPointsEarned+"\t\t\t|"+totalProductRedeemed+"\t\t\t|");
+            System.out.println("|"+year + "\t|$" + totalPointsRedeemed+"\t\t\t|"+totalPointsRedeemed+"\t\t\t|");
         }
         System.out.println("-----------------------------------------------------------");
     }
 }
 
 // Yearly Points Earned Trends Report
-class PointsEarnedTrendsReport extends Report {
+class PointsRedeemedTrendsReport extends Report {
     
-    // Constructor
-    public PointsEarnedTrendsReport(int totalPointsEarned, int totalProductRedeemed) {
-        super("", totalPointsEarned, totalProductRedeemed);
-        this.pointsEarnedData = new HashMap<>();
+    @Override
+    public void fetchRedemptionData() {
+            try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\Jason Paw\\OneDrive - student.tarc.edu.my\\Documents\\GitHub\\java100marks\\src\\data\\redemptionDetails.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(", ");
+                String redeemedItem = parts[2].substring(parts[2].indexOf(":") + 2);
+                int quantityRedeemed = Integer.parseInt(parts[4].substring(parts[4].indexOf(":") + 2));
+                redeemedItemsCount.put(redeemedItem, redeemedItemsCount.getOrDefault(redeemedItem, 0) + 1);
+                redeemedItemsQuantity.put(redeemedItem, redeemedItemsQuantity.getOrDefault(redeemedItem, 0) + quantityRedeemed);
+            }
+        } catch (IOException e) {
+            System.err.println("Error occurred while reading redeem_data.txt: " + e.getMessage());
+        }
     }
-
-    
-    // Method to add points earned data for a specific year
-    public void addPointsEarnedData(int year, int pointsEarned) {
-        pointsEarnedData.put(year, pointsEarned);
-    }
-    
     // Override generateReport method
     @Override
     public void generateReport() {
-        System.out.println("\n-------------------------------------");
-        System.out.println("| Total Points Earned Trends Report |");
-        System.out.println("-------------------------------------");
-        System.out.println("| Year | Points Earned ");
-        for (Map.Entry<Integer, Integer> entry : pointsEarnedData.entrySet()) {
-            int year = entry.getKey();
-            int pointsEarned = entry.getValue();
-            System.out.print("| " + year + " | ");
-            for (int i = 0; i < (pointsEarned/100); i++) {
-                System.out.print("*");
-            }
-            System.out.println("("+pointsEarned+")");
+        System.out.println("--------------------------------");
+        System.out.println("|Redemption Item Summary Report|");
+        System.out.println("--------------------------------");
+        for (Map.Entry<String, Integer> entry : redeemedItemsCount.entrySet()) {
+            String redeemedItem = entry.getKey();
+            int quantityRedeemed = redeemedItemsQuantity.getOrDefault(redeemedItem, 0);
+            int countRedeemed = entry.getValue();
+            System.out.print("Redeemed Items("+redeemedItem + "): \nTotal Count Redeemed: " + countRedeemed + "\nTotal Redeemed Amount: " + quantityRedeemed+"\n\n");
         }
-        System.out.println("");
     }
 }

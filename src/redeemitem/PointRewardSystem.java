@@ -10,9 +10,7 @@ package redeemitem;
  * @author Jason Paw
  */
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+
 import java.util.Scanner;
 
 
@@ -30,12 +28,11 @@ public class PointRewardSystem {
         boolean contTrans = true;
         boolean contaskadmin = true;
         
-        // Create reports for different loyalty statuses. THIS IS ONLY EXAMPLE WHERE IT COLLECT THE DATA JUST MODIFY IT
-        /**/
-        Report goldReport = new GoldStatusReport(5000,200);
-        Report silverReport = new SilverStatusReport(1500,200);
-        Report classicReport = new ClassicStatusReport(6500 ,200);
-        Report pointsEarnedReport = new PointsEarnedTrendsReport(1000,200);
+     
+        Report goldReport = new GoldStatusReport();
+        Report silverReport = new SilverStatusReport();
+        Report classicReport = new ClassicStatusReport();
+        Report pointsRedeemedReport = new PointsRedeemedTrendsReport();
       
 
         do{
@@ -60,12 +57,13 @@ public class PointRewardSystem {
             do{
                 try{
                     //Provide user input and display the output of report menu.
-                    System.out.print("\n-------------------------------------------------------\nWhich report do you want to look?\n-------------------------------------------------------\n(1) Overall Member Customer Yearly Report  \n(2) Overall Silver Customer Yearly Report \n(3) Overall Gold Customer Yearly Report  \n(4) Yearly Total Points Earned \n(0) Cancel\nPlease enter in the range[0 to 5]: ");
+                    System.out.print("\n-------------------------------------------------------\nWhich report do you want to look?\n-------------------------------------------------------\n(1) Overall Member Customer Yearly Report  \n(2) Overall Silver Customer Yearly Report \n(3) Overall Gold Customer Yearly Report  \n(4) Redemption Item Summary Report \n(0) Cancel\nPlease enter in the range[0 to 4]: ");
                     genereport_ans = scanner.nextInt();
 
                     switch (genereport_ans) {
                         case 1:
                             // Generate member customer report
+                            classicReport.fetchRedemptionData();
                             classicReport.generateReport();
                             //Create a loop
                             do {
@@ -103,6 +101,7 @@ public class PointRewardSystem {
                             break;
                         case 2:
                             // Generate Silver customer report
+                            silverReport.fetchRedemptionData();
                             silverReport.generateReport();
                             do {
                                 try{
@@ -139,6 +138,7 @@ public class PointRewardSystem {
                             break;
                         case 3:
                             // Generate Gold customer report
+                            goldReport.fetchRedemptionData();
                             goldReport.generateReport();
                             do {
                                 try{
@@ -174,10 +174,8 @@ public class PointRewardSystem {
                             break;
                         case 4:
                             // Adding points earned data for each year THIS IS ONLY EXAMPLE WHERE IT COLLECT THE DATA JUST MODIFY IT
-                            pointsEarnedReport.addPointsEarnedData(2020, 500);
-                            pointsEarnedReport.addPointsEarnedData(2021, 700);
-                            // Generating the report
-                            pointsEarnedReport.generateReport();
+                            pointsRedeemedReport.fetchRedemptionData();
+                            pointsRedeemedReport.generateReport();
                             do {
                                 try{
                                     //Provide user input and display the output of repeat report options.
