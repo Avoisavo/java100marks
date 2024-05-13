@@ -5,14 +5,21 @@ import java.util.List;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.util.InputMismatchException;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.FileNotFoundException;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+
+
 
 
 public class Main {
-
     public static Scanner scanner = new Scanner(System.in);
     private static Customer loggedInCustomer;
     private static int loggedInUserId;
-    
+       
     public static void main(String[] args) {
         int choice;
          do {
@@ -79,34 +86,38 @@ public class Main {
         return choice;
     }
     
-    public static void registerCustomer() {
-        // Get the last customer ID
-        int lastCustomerId = CustomerRegistration.getLastCustomerId();
-        // Increment the last customer ID to generate the next available ID
-        int newCustomerId = lastCustomerId + 1;
-        Customer customer = CustomerRegistration.createCustomer();
-        System.out.println("Customer created: ");
-        // Add the customer to the list of customers
-        CustomerRegistration.addCustomer(customer);
-        // Register the new customer with the new customer ID
-        CustomerRegistration.registerCustomer(customer, newCustomerId);
-    }
+public static void registerCustomer() {
+    // Create a new customer
+    Customer customer = CustomerRegistration.createCustomer();
     
-    public static void logIn() {
-        Customer loggedInCustomer = CustomerLogin.logInCustomer();
-        if (loggedInCustomer != null) {
-            System.out.println("Logged in successfully!");
-            // Set the logged-in customer
-            Main.loggedInCustomer = loggedInCustomer;
-            System.out.println("Customer details:");
-            System.out.println("Name: " + loggedInCustomer.getName());
-            System.out.println("IC: " + loggedInCustomer.getIc());
-            System.out.println("Phone: " + loggedInCustomer.getPhone());
-            System.out.println("Points: " + loggedInCustomer.getPoints());
-        } else {
-            System.out.println("Login failed. Please try again.");
-        }
+    // Print "Customer created"
+    System.out.println("Customer created");
+    
+    // Register the customer
+    CustomerRegistration.registerCustomer(customer);
+}
+
+    
+public static void logIn() {
+    Customer loggedInCustomer = CustomerLogin.logInCustomer();
+    if (loggedInCustomer != null) {
+        System.out.println("Logged in successfully!");
+        // Set the logged-in customer
+        Main.loggedInCustomer = loggedInCustomer;
+        // Set the logged-in user ID
+        loggedInUserId = Integer.parseInt(loggedInCustomer.getId());
+        System.out.println("Customer details:");
+        System.out.println("Name: " + loggedInCustomer.getName());
+        System.out.println("IC: " + loggedInCustomer.getIc());
+        System.out.println("Phone: " + loggedInCustomer.getPhone());
+        System.out.println("Points: " + loggedInCustomer.getPoints());
+        System.out.println("ID: " + loggedInUserId);
+    } else {
+        System.out.println("Login failed. Please try again.");
     }
+}
+
+
     
     public static void updateCustomer() {
         if (loggedInCustomer == null) {
@@ -141,32 +152,39 @@ public class Main {
     }
 
     public static void earnedPoint() {
-        if (loggedInUserId == 0) {
+        if (loggedInCustomer == null) {
             System.out.println("Please log in first.");
             return;
         }
         System.out.println("You have selected Earned Point.");
-        List<Product> availableProducts = Product.getAvailableProducts();
+        System.out.println("your ID: " + loggedInUserId);
+        
+        // Fetching customer points
+        int loggedInCustomerPoints = EarnedPoints.fetchCustomerPoints(loggedInUserId);
+        
+        // Creating a shopping cart and selecting products
         ShoppingCart cart = new ShoppingCart();
-        List<Product> selectedProducts = Product.selectProducts(scanner);
-        for (Product product : selectedProducts) {
-            cart.addToCart(product);
-        }
-        Payment.displayCartContents(cart);
+        cart.selectProducts(scanner);
+        
+        // Displaying cart contents
+        cart.displayCartContents();
+        
         // Make payment
-        if (Payment.makePayment(scanner)) {
+        if (cart.makePayment(scanner)) {
             int totalPointsEarned = cart.calculateTotalPointsEarned();
-            LocalDate earningDate = LocalDate.now(); // Get current date
-            //SAVE POINTS
+            LocalDate earningDate = LocalDate.now(); // Current date
+            
 
-            // RETRIEVE POINTS
-
-            // UPDATE POINTS
-
+            System.out.println("Earned " + totalPointsEarned + " points on " + earningDate);
+            
+            // Updating customer's points in the system
+            EarnedPoints.updateCustomerPoints(loggedInUserId, loggedInCustomerPoints + totalPointsEarned);
         }
     }
+    
 
     public static void redeemPoints() {
+     
         RedemptionManager RM = new RedemptionManager();
         RedeemFileUtils.loadItems();
 
@@ -263,15 +281,10 @@ public class Main {
             }
         }
 
-        // Add redeem points logic here
     }
-    
+
     public static void checkLoyalty() {
         System.out.println("You have selected Check Loyalty.");
-        int userId = information.getUserId(Main.scanner);
-        
-        LoyaltyStatus loyaltyStatus = new LoyaltyStatus();
-        loyaltyStatus.readLoyaltyStatusFromFile(userId);
 
  
     }
@@ -486,5 +499,8 @@ public class Main {
                }//the loop will stop when contGeneReport is false
             while(contGeneReport);
     }
+
+
+
 }
 

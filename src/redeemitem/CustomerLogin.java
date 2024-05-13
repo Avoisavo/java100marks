@@ -1,17 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package redeemitem; // please put it under customer module
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
-/**
- *
- * @author Linghue Wee
- */
+
 public class CustomerLogin {
     // please rethink the approach for this method, there is an easier way to do this
     public static Customer findCustomer(String name, String ic) {
@@ -20,44 +13,79 @@ public class CustomerLogin {
                 return customer; // Found the customer
             }
         }
-        return null; // Customer not found
+        return null; 
     }
 
-        public static Customer logInCustomer() {
-        while (true) {
-            System.out.print("Enter your name: ");
-            Main.scanner.nextLine(); 
-            String name = Main.scanner.nextLine().trim(); // Trim leading and trailing spaces
+    public static Customer logInCustomer() {
+        boolean loggedIn = false;
+        Customer customer = null;
+        String customerName = null;
+        String customerIc = null;
+        String phone = null;
+        String userId = null;
+        int points = 0;
 
-            System.out.print("Enter your IC: ");
-            String ic = Main.scanner.nextLine().trim(); // Trim leading and trailing spaces
+        while (!loggedIn) {
+            String name = CustomerRegistration.getInput("Enter user name : ", "^[a-zA-Z]+$", "Invalid name format. Please enter alphabets only.");
 
-            // Read customer data from the file and compare with user input
-            try (Scanner fileScanner = new Scanner(new File("src/data/customers.txt"))) {
+            String ic = CustomerRegistration.getInput("Enter user ic : ", "^\\d{12}$", "Invalid IC format. Please enter 12 digits.");
+
+            try (Scanner fileScanner = new Scanner(new File("/Users/avo/Documents/GitHub/java100marks/src/data/customers.txt"))) {
                 while (fileScanner.hasNextLine()) {
                     String line = fileScanner.nextLine();
-                    String[] parts = line.split(",");
-                    String customerId = parts[0].trim();
-                    String customerName = parts[1].trim();
-                    String customerIc = parts[2].trim();
+                    String[] parts = line.split(":");
+                    if (parts.length == 2) {
+                        String label = parts[0].trim();
+                        String value = parts[1].trim();
 
-                    // Use the findCustomer method to check if the customer exists
-                Customer customer = findCustomer(customerName, customerIc);
-                if (customer != null) {
-                    // Customer found, return the details
-                    String phone = parts[3].trim();
-                    int points = Integer.parseInt(parts[4].trim());
-                    System.out.println("Customer details:");
-                    return new Customer(customerId, customerName, customerIc, phone, points);
-                }
+                        switch (label) {
+                            case "User ID":
+                                userId = value;
+                                break;
+                            case "User Name":
+                                customerName = value;
+                                break;
+                            case "IC":
+                                customerIc = value;
+                                break;
+                            case "Phone Number":
+                                phone = value;
+                                break;
+                            case "Total Points Earned":
+                                points = Integer.parseInt(value);
+
+                                if (customerName != null && customerIc != null && phone != null) {
+                                    if (customerName.equalsIgnoreCase(name) && customerIc.equals(ic)) {
+                                        System.out.println("Logged in successfully!");
+                                        System.out.println("Customer details:");
+                                        System.out.println("User ID: " + userId);
+                                        System.out.println("Name: " + customerName);
+                                        System.out.println("IC: " + customerIc);
+                                        System.out.println("Phone: " + phone);
+                                        System.out.println("Points: " + points);
+                                        customer = new Customer(userId, customerName, customerIc, phone, points);
+                                        loggedIn = true; // Set the flag to true
+                                    }
+                                }
+                                break;
+                        }
+                    }
                 }
             } catch (IOException e) {
                 e.printStackTrace();
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
             }
 
-            System.out.println("Customer not found. Please try again.");
+            if (!loggedIn) {
+                System.out.println("Customer not found. Please try again.");
+            }
         }
+
+        return customer; // Return the logged-in customer
     }
-        
+
+
 
 }
+

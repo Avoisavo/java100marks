@@ -2,57 +2,105 @@ package redeemitem;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.Map;
 
 public class EarnedPoints {
 
-    private static final String POINTS_FILE_PATH = " src/data/points_earned.txt";
+    public static int fetchCustomerPoints(int userId) {
+    int points = 0;
+    String filePath = "/Users/avo/Documents/GitHub/java100marks/src/data/customers.txt";
+    try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+        String line;
+        while ((line = br.readLine()) != null) {
+            if (line.startsWith("User ID: " + userId)) {
+                String pointsLine = br.readLine();
+                if (pointsLine.startsWith("Total Points Earned: ")) {
+                    points = Integer.parseInt(pointsLine.substring("Total Points Earned: ".length()));
+                }
+                break;
+            }
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    return points;
+}
 
-    public static void updatePointsEarned(int userId, int additionalPoints, int totalEarnedPoints) {
-        Map<Integer, Integer> pointsMap = new HashMap<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(POINTS_FILE_PATH))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                if (line.startsWith("User ID: ")) {
-                    int id = Integer.parseInt(line.substring("User ID: ".length()));
-                    reader.readLine(); // Skip Earned Points Date
-                    reader.readLine(); // Skip Expiry Date
-                    String pointsLine = reader.readLine(); // Read Total Points Earned
-                    int points = Integer.parseInt(pointsLine.substring("Total Points Earned: ".length()));
-                    pointsMap.put(id, points);
+        public static void updateCustomerPoints(int userId, int additionalPoints) {
+        Path filePath = Paths.get("/Users/avo/Documents/GitHub/java100marks/src/data/customers.txt");
+        try {
+            List<String> lines = Files.readAllLines(filePath, StandardCharsets.UTF_8);
+            boolean pointsUpdated = false;
+            for (int i = 0; i < lines.size(); i++) {
+                String line = lines.get(i);
+                if (line.startsWith("User ID: " + userId)) {
+                    String pointsLine = lines.get(i + 4);
+                    if (pointsLine.startsWith("Total Points Earned: ")) {
+                        int oldPoints = Integer.parseInt(pointsLine.substring("Total Points Earned: ".length()));
+                        lines.set(i + 4, "Total Points Earned: " + (oldPoints + additionalPoints));
+                        pointsUpdated = true;
+                    }
+                    // Update expiry date or add if not present
+                    if (lines.size() > i + 5 && lines.get(i + 5).startsWith("Expiry Date: ")) {
+                        lines.set(i + 5, "Expiry Date: " + LocalDate.now().plusDays(90).format(DateTimeFormatter.ISO_DATE));
+                    } else {
+                        lines.add(i + 5, "Expiry Date: " + LocalDate.now().plusDays(90).format(DateTimeFormatter.ISO_DATE));
+                    }
+                    break;
                 }
             }
-        } catch (IOException e) {
-            System.err.println("Error occurred while reading points earned from file: " + e.getMessage());
-        }
-
-        // Update points for the given user ID
-        if (pointsMap.containsKey(userId)) {
-            int currentPoints = pointsMap.get(userId);
-            pointsMap.put(userId, currentPoints + additionalPoints);
-        }
-
-        // Rewrite points to file
-        try (FileWriter writer = new FileWriter(POINTS_FILE_PATH)) {
-            for (Map.Entry<Integer, Integer> entry : pointsMap.entrySet()) {
-                writer.write("User ID: " + entry.getKey() + "\n");
-                writer.write("Earned Points Date: " + LocalDate.now() + "\n");
-                writer.write("Expiry Date: " + LocalDate.now().plusDays(90) + "\n");
-                writer.write("Total Points Earned: " + (entry.getKey() == userId ? totalEarnedPoints : entry.getValue()) + "\n\n");
+            if (!pointsUpdated) {
+                lines.add("User ID: " + userId);
+                lines.add("Total Points Earned: " + additionalPoints);
+                lines.add("Expiry Date: " + LocalDate.now().plusDays(90).format(DateTimeFormatter.ISO_DATE));
             }
-            System.out.println("Points earned updated successfully.");
+            Files.write(filePath, lines, StandardCharsets.UTF_8);
         } catch (IOException e) {
-            System.err.println("Error occurred while updating points earned to file: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
-    public static void setTotalEarnedPoints(int userId, int newTotalEarnedPoints) {
-        // Call updatePointsEarned with the new total points
-        updatePointsEarned(userId, 0, newTotalEarnedPoints); // Assuming no additional points are added
+    public static void earnedPoint(int userId) {
+        String filePath = "/Users/avo/Documents/GitHub/java100marks/src/data/customers.txt  ";
+        int totalEarnedPoints = getTotalEarnedPoints(filePath, userId);
+        if (totalEarnedPoints == -1) {
+            System.out.println("User with ID " + userId + " not found.");
+            return;
+        }
+
+        // Your logic here using totalEarnedPoints
     }
+
+    private static int getTotalEarnedPoints(String filePath, int userId) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            StringBuilder stringBuilder = new StringBuilder();
+            while ((line = br.readLine()) != null) {
+                stringBuilder.append(line).append("\n");
+            }
+
+            Pattern pattern = Pattern.compile("User ID: " + userId + "\\n.+\\n.+\\nTotal Points Earned: (\\d+)");
+            Matcher matcher = pattern.matcher(stringBuilder.toString());
+            if (matcher.find()) {
+                return Integer.parseInt(matcher.group(1));
+            } else {
+                return -1; // User not found
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading file: " + e.getMessage());
+            return -1;
+        }
+    }
+    
+
 }
+

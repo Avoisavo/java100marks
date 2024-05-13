@@ -1,21 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
-
 package redeemitem; // please put it under "customer" module
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Customer {
-    //public static Customer[] customers;
     private static List<Customer> customers = new ArrayList<>();
     
-    //  to get all customers
     public static List<Customer> getCustomers() {
-    // this method no need, "Customers" should have no access to other customers in the system
-    // if you want to keep this method, write it so that "Admin" is the only class that uses this method
+
         return customers;
     }
     
@@ -97,9 +89,5 @@ public class Customer {
     }
 
 }
-    //end 
-    
-    
-// please dont have so many empty lines
 
 
