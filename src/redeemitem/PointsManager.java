@@ -19,13 +19,12 @@ public class PointsManager {
                 customerPoints -= totalPoints;
                 quantity -= quantityNeeded;
                 RedeemFileUtils.setItemQuantity(selectedIndex,quantity);
-                EarnedPoints.setTotalEarnedPoints(userId,customerPoints);
                 
                 System.out.println("Points deducted successfully. Remaining points: " + customerPoints);
                 System.out.println("Item redeemed successfully. Thank you!\n");
                 
                 // Return the totalPoints
-                return totalPoints;
+                return customerPoints;
             } else {
                 System.out.println("Insufficient points.\n");
                 return 0; // Return 0 if insufficient points
@@ -35,4 +34,5 @@ public class PointsManager {
             return 0; // Return 0 for invalid index
         }
     }
+    
 }

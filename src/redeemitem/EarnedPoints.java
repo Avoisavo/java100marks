@@ -16,27 +16,31 @@ import java.time.format.DateTimeFormatter;
 public class EarnedPoints {
 
     public static int fetchCustomerPoints(int userId) {
-    int points = 0;
-    String filePath = "/Users/avo/Documents/GitHub/java100marks/src/data/customers.txt";
-    try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-        String line;
-        while ((line = br.readLine()) != null) {
-            if (line.startsWith("User ID: " + userId)) {
-                String pointsLine = br.readLine();
-                if (pointsLine.startsWith("Total Points Earned: ")) {
-                    points = Integer.parseInt(pointsLine.substring("Total Points Earned: ".length()));
+        int points = 0;
+        String filePath = "C:\\Users\\ladym\\Documents\\GitHub\\java100marks\\src\\data\\customers.txt";
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            boolean foundUserId = false;
+            while ((line = br.readLine()) != null) {
+                if (foundUserId) {
+                    // Check if the line starts with "Total Points Earned: "
+                    if (line.startsWith("Total Points Earned: ")) {
+                        // Extract the numeric part after "Total Points Earned: "
+                        points = Integer.parseInt(line.substring("Total Points Earned: ".length()));
+                        break; // Exit the loop once points are found
+                    }
+                } else if (line.startsWith("User ID: " + userId)) {
+                    foundUserId = true; // Mark that we've found the user ID
                 }
-                break;
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-    } catch (IOException e) {
-        e.printStackTrace();
+        return points;
     }
-    return points;
-}
 
-        public static void updateCustomerPoints(int userId, int additionalPoints) {
-        Path filePath = Paths.get("/Users/avo/Documents/GitHub/java100marks/src/data/customers.txt");
+    public static void updateCustomerPoints(int userId, int additionalPoints) {
+        Path filePath = Paths.get("C:\\Users\\ladym\\Documents\\GitHub\\java100marks\\src\\data\\customers.txt");
         try {
             List<String> lines = Files.readAllLines(filePath, StandardCharsets.UTF_8);
             boolean pointsUpdated = false;
@@ -63,6 +67,7 @@ public class EarnedPoints {
                 lines.add("Total Points Earned: " + additionalPoints);
                 lines.add("Expiry Date: " + LocalDate.now().plusDays(90).format(DateTimeFormatter.ISO_DATE));
             }
+
             Files.write(filePath, lines, StandardCharsets.UTF_8);
         } catch (IOException e) {
             e.printStackTrace();
@@ -70,7 +75,7 @@ public class EarnedPoints {
     }
 
     public static void earnedPoint(int userId) {
-        String filePath = "/Users/avo/Documents/GitHub/java100marks/src/data/customers.txt  ";
+        String filePath = "C:\\Users\\ladym\\Documents\\GitHub\\java100marks\\src\\data\\customers.txt ";
         int totalEarnedPoints = getTotalEarnedPoints(filePath, userId);
         if (totalEarnedPoints == -1) {
             System.out.println("User with ID " + userId + " not found.");
@@ -100,7 +105,33 @@ public class EarnedPoints {
             return -1;
         }
     }
-    
 
+    public static void setTotalEarnedPoints(int userId, int newPoints) {
+        Path filePath = Paths.get("C:\\Users\\ladym\\Documents\\GitHub\\java100marks\\src\\data\\customers.txt");
+        try {
+            List<String> lines = Files.readAllLines(filePath, StandardCharsets.UTF_8);
+            boolean pointsUpdated = false;
+            for (int i = 0; i < lines.size(); i++) {
+                String line = lines.get(i);
+                if (line.startsWith("User ID: " + userId)) {
+                    // Find the line that contains the total points earned
+                    for (int j = i + 3; j < lines.size(); j++) {
+                        if (lines.get(j).startsWith("Total Points Earned: ")) {
+                            lines.set(j, "Total Points Earned: " + newPoints);
+                            pointsUpdated = true;
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+            if (!pointsUpdated) {
+                System.out.println("User with ID " + userId + " not found.");
+            } else {
+                Files.write(filePath, lines, StandardCharsets.UTF_8);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
-

@@ -30,7 +30,7 @@ public class CustomerLogin {
 
             String ic = CustomerRegistration.getInput("Enter user ic : ", "^\\d{12}$", "Invalid IC format. Please enter 12 digits.");
 
-            try (Scanner fileScanner = new Scanner(new File("/Users/avo/Documents/GitHub/java100marks/src/data/customers.txt"))) {
+            try (Scanner fileScanner = new Scanner(new File("C:\\Users\\ladym\\Documents\\GitHub\\java100marks\\src\\data\\customers.txt"))) {
                 while (fileScanner.hasNextLine()) {
                     String line = fileScanner.nextLine();
                     String[] parts = line.split(":");

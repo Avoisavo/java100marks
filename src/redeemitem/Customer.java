@@ -80,6 +80,7 @@ public class Customer {
         this.phone = phone;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true; // no need this line, just check if name or ic is equal to each other

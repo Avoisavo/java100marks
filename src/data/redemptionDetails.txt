@@ -1,0 +1,2 @@
+User ID: 123, Transaction ID: 298490, Redeemed Item: Jeans, Total Points Redeemed: 800, Quantity Redeemed: 2, Redemption Date: 2024-05-13 23:56:11
+User ID: 123, Transaction ID: 585122, Redeemed Item: Jeans, Total Points Redeemed: 500, Quantity Redeemed: 3, Redemption Date: 2024-05-13 23:57:24
