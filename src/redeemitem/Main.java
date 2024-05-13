@@ -36,6 +36,10 @@ public class Main {
             System.out.println("8. Exit");
             System.out.println("================================");
             System.out.print("Enter your choice: ");
+            while (!scanner.hasNextInt()) {
+                System.out.println("Invalid input. Please enter a digit number:");
+                scanner.next(); // Consume the invalid input
+            }
             choice = scanner.nextInt();
 
             switch (choice) {
@@ -66,7 +70,7 @@ public class Main {
                 default:
                     System.out.println("Invalid choice. Please enter a number between 1 and 5.");
             }
-        } while (choice != 6);
+        } while (choice != 8);
         scanner.close();
     }
     
@@ -159,7 +163,7 @@ public static void logIn() {
         System.out.println("You have selected Earned Point.");
         System.out.println("your ID: " + loggedInUserId);
         
-        // Fetching customer points
+    
         int loggedInCustomerPoints = EarnedPoints.fetchCustomerPoints(loggedInUserId);
         
         // Creating a shopping cart and selecting products
@@ -184,7 +188,7 @@ public static void logIn() {
     
 
     public static void redeemPoints() {
-     
+        /*
         RedemptionManager RM = new RedemptionManager();
         RedeemFileUtils.loadItems();
 
@@ -280,7 +284,7 @@ public static void logIn() {
                     break;
             }
         }
-
+        */ 
     }
 
     public static void checkLoyalty() {

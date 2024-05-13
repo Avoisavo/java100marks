@@ -35,3 +35,9 @@ Total Points Earned: 60
 Expiry Date: 2024-08-11
 
 
+User ID: 672
+User Name: lek
+IC: 123456101234
+Phone Number: 1234561234
+Total Points Earned: 0
+
