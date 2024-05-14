@@ -1,33 +1,27 @@
-User ID: 123
-User Name: zhiwei
-IC: 030303021111
-Phone Number: 0194785522
-Total Points Earned: 4070
-Expiry Date: 2024-08-12
-
-User ID: 403
-User Name: avp
-IC: 030303020000
-Phone Number: 0154782255
-Total Points Earned: 105
-Expiry Date: 2024-08-12
-
-User ID: 880
-User Name: avo
-IC: 030303021111
-Phone Number: 1472581144
-Total Points Earned: 10
-
-User ID: 341
-User Name: pipi
-IC: 123456101234
-Phone Number: 1234567788
-Total Points Earned: 60
-Expiry Date: 2024-08-11
-
-User ID: 672
-User Name: lek
-IC: 123456101234
-Phone Number: 1234561234
+User ID: 608
+User Name: lh
+IC: 132549874562
+Phone Number: 0213654789
+Loyalty Status: Classic
 Total Points Earned: 0
 
+User ID: 190
+User Name: fishfish
+IC: 036598745213
+Phone Number: 0147859641
+Loyalty Status: Gold
+Total Points Earned: 500
+
+User ID: 192
+User Name: Haha
+IC: 036598745213
+Phone Number: 0147859641
+Loyalty Status: Silver
+Total Points Earned: 80
+
+User ID: 193
+User Name: lol
+IC: 036598745213
+Phone Number: 0147859641
+Loyalty Status: Silver
+Total Points Earned: 90

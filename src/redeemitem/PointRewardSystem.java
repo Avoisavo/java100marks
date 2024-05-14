@@ -32,7 +32,7 @@ public class PointRewardSystem {
         Report goldReport = new GoldStatusReport();
         Report silverReport = new SilverStatusReport();
         Report classicReport = new ClassicStatusReport();
-        Report pointsRedeemedReport = new PointsRedeemedTrendsReport();
+        Report redemptionReport = new RedemptionSummary();
       
 
         do{
@@ -63,7 +63,7 @@ public class PointRewardSystem {
                     switch (genereport_ans) {
                         case 1:
                             // Generate member customer report
-                            classicReport.fetchRedemptionData();
+                            classicReport.fetchCustomerData();
                             classicReport.generateReport();
                             //Create a loop
                             do {
@@ -101,7 +101,7 @@ public class PointRewardSystem {
                             break;
                         case 2:
                             // Generate Silver customer report
-                            silverReport.fetchRedemptionData();
+                            silverReport.fetchCustomerData();
                             silverReport.generateReport();
                             do {
                                 try{
@@ -138,7 +138,7 @@ public class PointRewardSystem {
                             break;
                         case 3:
                             // Generate Gold customer report
-                            goldReport.fetchRedemptionData();
+                            goldReport.fetchCustomerData();
                             goldReport.generateReport();
                             do {
                                 try{
@@ -174,8 +174,8 @@ public class PointRewardSystem {
                             break;
                         case 4:
                             // Adding points earned data for each year THIS IS ONLY EXAMPLE WHERE IT COLLECT THE DATA JUST MODIFY IT
-                            pointsRedeemedReport.fetchRedemptionData();
-                            pointsRedeemedReport.generateReport();
+                            redemptionReport.fetchRedemptionData();
+                            redemptionReport.generateReport();
                             do {
                                 try{
                                     //Provide user input and display the output of repeat report options.

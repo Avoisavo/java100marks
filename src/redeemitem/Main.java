@@ -310,7 +310,7 @@ public class Main {
         Report goldReport = new GoldStatusReport();
         Report silverReport = new SilverStatusReport();
         Report classicReport = new ClassicStatusReport();
-        Report pointsRedeemedReport = new PointsRedeemedTrendsReport();
+        Report redemptionReport = new RedemptionSummary();
       
 
         do{
@@ -335,7 +335,7 @@ public class Main {
             do{
                 try{
                     //Provide user input and display the output of report menu.
-                    System.out.print("\n-------------------------------------------------------\nWhich report do you want to look?\n-------------------------------------------------------\n(1) Overall Member Customer Yearly Report  \n(2) Overall Silver Customer Yearly Report \n(3) Overall Gold Customer Yearly Report  \n(4) Redemption Item Summary Report \n(0) Cancel\nPlease enter in the range[0 to 4]: ");
+                    System.out.print("\n-------------------------------------------------------\nWhich report do you want to look?\n-------------------------------------------------------\n(1) Overall Classic Status Report  \n(2) Overall Silver Status Report \n(3) Overall Gold Status Report  \n(4) Redemption Item Summary Report \n(0) Cancel\nPlease enter in the range[0 to 4]: ");
                     genereport_ans = scanner.nextInt();
 
                     switch (genereport_ans) {
@@ -452,8 +452,8 @@ public class Main {
                             break;
                         case 4:
                             // Adding points earned data for each year THIS IS ONLY EXAMPLE WHERE IT COLLECT THE DATA JUST MODIFY IT
-                            pointsRedeemedReport.fetchRedemptionData();
-                            pointsRedeemedReport.generateReport();
+                            redemptionReport.fetchRedemptionData();
+                            redemptionReport.generateReport();
                             do {
                                 try{
                                     //Provide user input and display the output of repeat report options.

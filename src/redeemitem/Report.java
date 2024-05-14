@@ -9,10 +9,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class Report {
-   public Map<String, Integer> redeemedItemsCount = new HashMap<>();
-   public Map<LocalDate, Integer> redemptionPerDay = new HashMap<>();
-   Map<String, Integer> redeemedItemsQuantity = new HashMap<>();
-   public int totalPointsRedeemed = 0;
+   protected Map<String, Integer> redeemedItemsCount = new HashMap<>();
+   protected Map<LocalDate, Integer> redemptionPerDay = new HashMap<>();
+   protected Map<String, String> userNamesMap = new HashMap<>();
+   protected Map<String, Integer> pointsMap = new HashMap<>();
+   protected Map<String, Integer> redeemedItemsQuantity = new HashMap<>();
+   protected int totalPointsRedeemed = 0;
    
    public abstract void generateReport();
    
@@ -33,6 +35,35 @@ public abstract class Report {
                 System.err.println("Error occurred while reading redeem_data.txt: " + e.getMessage());
             }
     }
+   protected void fetchCustomerData() {
+        try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\Jason Paw\\OneDrive - student.tarc.edu.my\\Documents\\GitHub\\java100marks\\src\\data\\customers.txt"))) {
+            String line;
+            String userId = "";
+            String userName = "";
+            String loyaltyStatus = "";
+            int totalPointsEarned = 0;
+
+            while ((line = reader.readLine()) != null) {
+                if (line.startsWith("User ID: ")) {
+                    userId = line.split(": ")[1];
+                } else if (line.startsWith("User Name: ")) {
+                    userName = line.split(": ")[1];
+                } else if (line.startsWith("Loyalty Status: ")) {
+                    loyaltyStatus = line.split(": ")[1];
+                } else if (line.startsWith("Total Points Earned: ")) {
+                    totalPointsEarned = Integer.parseInt(line.split(": ")[1]);
+
+                    // Store the user name and total points earned
+                    String key = userId + "-" + loyaltyStatus;
+                    userNamesMap.put(key, userName);
+                    pointsMap.put(key, totalPointsEarned);
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error occurred while reading the file: " + e.getMessage());
+        }
+    }
+
 }
 
 // please refer to updated UML diagram or group leader regarding the updated policy of handling loyalty status
@@ -41,18 +72,25 @@ public abstract class Report {
  class GoldStatusReport extends Report {
    
     // Override generateReport method
-    @Override
+     @Override
     public void generateReport() {
-        System.out.println("\n---------------------------------------------------------");
-        System.out.println("|        Overall Gold Customer Yearly Report          |");
-        System.out.println("---------------------------------------------------------");
-        System.out.println("|Year\t|Total Points Earned\t|Total Product Redeemed\t|");
-        System.out.println("---------------------------------------------------------");
-        // Simulated data for each year
-        for (int year = 2020; year <= 2021; year++) {
-            System.out.println("|"+year + "\t|$" + totalPointsRedeemed+"\t\t\t|"+totalPointsRedeemed+"\t\t\t|");
+        int totalPoints = 0;
+        System.out.println("\nGold Status Report:");
+        System.out.println("-----------------------------------------------------");
+        System.out.println("|User ID\t|User Name\t|Total Points Earned|");
+        System.out.println("-----------------------------------------------------");
+
+        for (Map.Entry<String, Integer> entry : pointsMap.entrySet()) {
+            if (entry.getKey().endsWith("Gold")) {
+                String userId = entry.getKey().split("-")[0];
+                String userName = userNamesMap.get(entry.getKey());
+                int pointsEarned = entry.getValue();
+                totalPoints += pointsEarned;
+                System.out.println("|"+userId + "\t\t|" + userName + "\t\t|" + pointsEarned+"\t\t    |");
+            }
         }
-        System.out.println("---------------------------------------------------------");
+        System.out.println("-----------------------------------------------------");
+        System.out.println("\nTotal Points Earned by All Gold Customer: " + totalPoints + "\n");
     }
 }
 
@@ -62,16 +100,23 @@ public abstract class Report {
     // Override generateReport method
     @Override
     public void generateReport() {
-        System.out.println("\n---------------------------------------------------------");
-        System.out.println("|      Overall Silver Customer Yearly Report          |");
-        System.out.println("---------------------------------------------------------");
-        System.out.println("|Year\t|Total Amount Earned\t|Total Product Redeemed\t|");
-        System.out.println("---------------------------------------------------------");
-        // Simulated data for each year
-        for (int year = 2020; year <= 2021; year++) {
-            System.out.println("|"+year + "\t|$" + totalPointsRedeemed+"\t\t\t|"+totalPointsRedeemed+"\t\t\t|");
+        int totalPoints = 0;
+        System.out.println("\nSilver Status Report:");
+        System.out.println("-----------------------------------------------------");
+        System.out.println("|User ID\t|User Name\t|Total Points Earned|");
+        System.out.println("-----------------------------------------------------");
+
+        for (Map.Entry<String, Integer> entry : pointsMap.entrySet()) {
+            if (entry.getKey().endsWith("Silver")) {
+                String userId = entry.getKey().split("-")[0];
+                String userName = userNamesMap.get(entry.getKey());
+                int pointsEarned = entry.getValue();
+                totalPoints += pointsEarned;
+                System.out.println("|"+userId + "\t\t|" + userName + "\t\t|" + pointsEarned+"\t\t    |");
+            }
         }
-        System.out.println("---------------------------------------------------------");
+        System.out.println("-----------------------------------------------------");
+        System.out.println("\nTotal Points Earned by All Silver Customer: " + totalPoints + "\n");
     }
 }
 
@@ -81,21 +126,28 @@ public abstract class Report {
     // Override generateReport method
     @Override
     public void generateReport() {
-        System.out.println("\n-----------------------------------------------------------");
-        System.out.println("|      Overall Classic Customer Yearly Report         |");
-        System.out.println("-----------------------------------------------------------");
-        System.out.println("|Year\t|Total Amount Earned\t|Total Product Redeemed\t|");
-        System.out.println("-----------------------------------------------------------");
-        // Simulated data for each year
-        for (int year = 2020; year <= 2021; year++) {
-            System.out.println("|"+year + "\t|$" + totalPointsRedeemed+"\t\t\t|"+totalPointsRedeemed+"\t\t\t|");
+        int totalPoints = 0;
+        System.out.println("\nClassic Status Report:");
+        System.out.println("-----------------------------------------------------");
+        System.out.println("|User ID\t|User Name\t|Total Points Earned|");
+        System.out.println("-----------------------------------------------------");
+
+        for (Map.Entry<String, Integer> entry : pointsMap.entrySet()) {
+            if (entry.getKey().endsWith("Classic")) {
+                String userId = entry.getKey().split("-")[0];
+                String userName = userNamesMap.get(entry.getKey());
+                int pointsEarned = entry.getValue();
+                totalPoints += pointsEarned;
+                System.out.println("|"+userId + "\t\t|" + userName + "\t\t|" + pointsEarned+"\t\t    |");
+            }
         }
-        System.out.println("-----------------------------------------------------------");
+        System.out.println("-----------------------------------------------------");
+        System.out.println("\nTotal Points Earned by All Classic Customer: " + totalPoints + "\n");
     }
 }
 
 // Yearly Points Earned Trends Report
-class PointsRedeemedTrendsReport extends Report {
+class RedemptionSummary extends Report {
     
     @Override
     public void fetchRedemptionData() {
@@ -122,7 +174,7 @@ class PointsRedeemedTrendsReport extends Report {
             String redeemedItem = entry.getKey();
             int quantityRedeemed = redeemedItemsQuantity.getOrDefault(redeemedItem, 0);
             int countRedeemed = entry.getValue();
-            System.out.print("Redeemed Items("+redeemedItem + "): \nTotal Count Redeemed: " + countRedeemed + "\nTotal Redeemed Amount: " + quantityRedeemed+"\n\n");
+            System.out.print("Redeemed Items("+redeemedItem + ") \nTotal Count Redeemed: " + countRedeemed + "\nTotal Redeemed Amount: " + quantityRedeemed+"\n\n");
         }
     }
 }
