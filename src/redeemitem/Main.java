@@ -233,7 +233,6 @@ public class Main {
                     break;
                 case 4:
                     RedeemFileUtils.displayItems();
-                    System.out.println(loggedInUserId);
                     break;
                 case 5:
                     RedeemFileUtils.displayItems();
