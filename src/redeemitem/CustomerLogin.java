@@ -1,4 +1,4 @@
-package redeemitem; // please put it under customer module
+package redeemitem; 
 
 import java.io.File;
 import java.io.IOException;
@@ -30,8 +30,7 @@ public class CustomerLogin {
             String name = CustomerRegistration.getInput("Enter user name : ", "^[a-zA-Z]+$", "Invalid name format. Please enter alphabets only.");
 
             String ic = CustomerRegistration.getInput("Enter user ic : ", "^\\d{12}$", "Invalid IC format. Please enter 12 digits.");
-
-            try (Scanner fileScanner = new Scanner(new File("C:\\Users\\ladym\\Documents\\GitHub\\java100marks\\src\\data\\customers.txt"))) {
+            try (Scanner fileScanner = new Scanner(new File("src/redeemitem/customers.txt"))) {
                 while (fileScanner.hasNextLine()) {
                     String line = fileScanner.nextLine();
                     String[] parts = line.split(":");
@@ -86,11 +85,7 @@ public class CustomerLogin {
                 System.out.println("Customer not found. Please try again.");
             }
         }
-
         return customer; // Return the logged-in customer
     }
-
-
-
 }
 

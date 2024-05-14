@@ -1,0 +1,71 @@
+User ID: 199
+User Name: Welcome
+IC: 036598745213
+Phone Number: 0147859641
+Loyalty Status: Gold
+Total Points Earned: 4600
+Total Points Earned: 10321
+Expiry Date: 2024-08-12
+
+
+User ID: 608
+User Name: lh
+IC: 132549874562
+Phone Number: 0213654789
+Loyalty Status: Classic
+Total Points Earned: 0
+Expiry Date: 2024-08-12
+
+
+User ID: 190
+User Name: fishfish
+IC: 036598745213
+Phone Number: 0147859641
+Loyalty Status: Gold
+Total Points Earned: 510
+Expiry Date: 2024-08-12
+
+
+
+User ID: 263
+User Name: hello
+IC: 123456121234
+Phone Number: 1234567897
+Loyalty Status: Gold
+Total Points Earned: 593
+Expiry Date: 2024-08-12
+
+
+User ID: 923
+User Name: avo
+IC: 123456121234
+Phone Number: 1234567897
+Loyalty Status: Classic
+Total Points Earned: 1920
+Expiry Date: 2024-08-12
+
+User ID: 307
+User Name: why
+IC: 123456121234
+Phone Number: 1234567894
+Loyalty Status: Classic
+Total Points Earned: 25
+Expiry Date: 2024-08-12
+
+
+User ID: 474
+User Name: why
+IC: 123456121234
+Phone Number: 1234567898
+Loyalty Status: Classic
+Total Points Earned: 10
+Expiry Date: 2024-08-12
+
+User ID: 604
+User Name: o
+IC: 123456121234
+Phone Number: 1234567897
+Loyalty Status: Classic
+Total Points Earned: 2060
+Expiry Date: 2024-08-12
+

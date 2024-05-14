@@ -63,6 +63,8 @@ public class Customer {
     public String getLoyaltyStatus() {
         return loyaltyStatus;
     }
+    
+    
 
     public int getPoints() {
         return points;

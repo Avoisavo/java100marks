@@ -1,21 +1,15 @@
 package redeemitem;
 
-import java.util.List;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.util.InputMismatchException;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.FileNotFoundException;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 
 public class Main {
 
     public static Scanner scanner = new Scanner(System.in);
     private static Customer loggedInCustomer;
     private static int loggedInUserId;
+    
 
     public static void main(String[] args) {
         int choice;
@@ -50,6 +44,7 @@ public class Main {
                     updateCustomer();
                     break;
                 case 4:
+                    printWorkingDirectory();
                     earnedPoint();
                     break;
                 case 5:
@@ -150,43 +145,55 @@ public class Main {
     }
 
     public static void earnedPoint() {
-        if (loggedInCustomer == null) {
-            System.out.println("Please log in first.");
-            return;
-        }
-        System.out.println("You have selected Earned Point.");
-        System.out.println("your ID: " + loggedInUserId);
-
-        int loggedInCustomerPoints = EarnedPoints.fetchCustomerPoints(loggedInUserId);
-
-        // Creating a shopping cart and selecting products
-        ShoppingCart cart = new ShoppingCart();
-        cart.selectProducts(scanner);
-
-        // Displaying cart contents
-        cart.displayCartContents();
-
-        // Make payment
-        if (cart.makePayment(scanner)) {
-            int totalPointsEarned = cart.calculateTotalPointsEarned();
-            LocalDate earningDate = LocalDate.now(); // Current date
-
-           // Log earned points and date
-           System.out.println("Earned " + totalPointsEarned + " points on " + earningDate);
-
-           // Update customer's points in the system
-           EarnedPoints.updateCustomerPoints(loggedInUserId, totalPointsEarned);
-
-           // Fetch current points
-           int currentPoints = EarnedPoints.fetchCustomerPoints(loggedInUserId);
-           System.out.println("Current points for user " + loggedInUserId + ": " + currentPoints);
-
-
-           // Fetch updated points
-           int updatedPoints = EarnedPoints.fetchCustomerPoints(loggedInUserId);
-           System.out.println("Updated points for user " + loggedInUserId + ": " + updatedPoints);
-        }
+if (loggedInCustomer == null) {
+        System.out.println("Please log in first.");
+        return;
     }
+    System.out.println("You have selected Earned Point.");
+    System.out.println("Your ID: " + loggedInUserId);
+
+    int loggedInCustomerPoints = EarnedPoints.fetchCustomerPoints(loggedInUserId);
+
+    // Creating a shopping cart and selecting products
+    ShoppingCart cart = new ShoppingCart();
+    cart.selectProducts(scanner);
+
+    // Displaying cart contents
+    cart.displayCartContents();
+
+    // Make payment
+    if (cart.makePayment(scanner)) {
+        int totalPointsEarned = cart.calculateTotalPointsEarned();
+        LocalDate earningDate = LocalDate.now(); // Current date
+        // Log earned points and date
+        System.out.println("Earned " + totalPointsEarned + " points on " + earningDate);
+        // Update customer's points in the system
+        EarnedPoints.updateCustomerPoints(loggedInUserId, totalPointsEarned);
+        // Fetch current points
+        int currentPoints = EarnedPoints.fetchCustomerPoints(loggedInUserId);
+        System.out.println("Current points for user " + loggedInUserId + ": " + currentPoints);
+
+        // Fetching loyalty status for the logged-in user
+        LoyaltyStatus loyaltyStatus = new LoyaltyStatus();
+        loyaltyStatus.readLoyaltyStatusFromFile(loggedInUserId);
+        String status = loyaltyStatus.getStatus(loggedInUserId);
+
+        // Determine the number of points to add based on the loyalty status
+        int additionalPoints = 0;
+        if (status.equals("Gold")) {
+            additionalPoints = 20;
+        } else if (status.equals("Silver")) {
+            additionalPoints = 5;
+        }
+
+        // Add additional points based on the loyalty status
+        EarnedPoints.updateCustomerPoints(loggedInUserId, additionalPoints);
+
+        // Fetch updated points after adding loyalty status points
+        int finalUpdatedPoints = EarnedPoints.fetchCustomerPoints(loggedInUserId);
+        System.out.println("Final updated points for user " + loggedInUserId + ": " + finalUpdatedPoints);
+    }
+            }
 
     public static void redeemPoints() {
         if (loggedInCustomer == null) {
@@ -511,5 +518,9 @@ public class Main {
             while(contGeneReport);  
          
     }     
+       public static void printWorkingDirectory() {
+        String workingDirectory = System.getProperty("user.dir");
+        System.out.println("Current working directory: " + workingDirectory);
+    }
 
 }
