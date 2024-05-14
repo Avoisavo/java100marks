@@ -34,9 +34,11 @@ public abstract class Report {
             System.err.println("Error occurred while reading redeem_data.txt: " + e.getMessage());
         }
     }
+
    
    public void fetchCustomerData() {
         try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\Jason Paw\\OneDrive - student.tarc.edu.my\\Documents\\GitHub\\java100marks\\src\\data\\customers.txt"))) {
+
             String line;
             String userId = "";
             String userName = "";
