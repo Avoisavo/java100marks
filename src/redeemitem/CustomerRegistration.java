@@ -93,7 +93,7 @@ public class CustomerRegistration {
         // Generate a random 3-digit customer ID
         int newCustomerId = generateRandomCustomerId();
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("/Users/Linghue Wee/Documents/GitHub/java100marks/src/data/customers.txt", true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\ladym\\Documents\\GitHub\\java100marks\\src\\data\\customers.txt", true))) {
             // Write customer information to the file
             writer.write("User ID: " + newCustomerId + "\n");
             writer.write("User Name: " + customer.getName() + "\n");

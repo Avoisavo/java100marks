@@ -30,7 +30,7 @@ public class CustomerUpdate {
     }
      
     private static void updateFile(Customer updatedCustomer) {
-        File originalFile = new File("/Users/avo/Documents/GitHub/java100marks/src/data/customers.txt");
+        File originalFile = new File("C:\\Users\\ladym\\Documents\\GitHub\\java100marks\\src\\data\\customers.txt");
         File tempFile = new File("src/data/temp_customers.txt");
 
         try (BufferedReader reader = new BufferedReader(new FileReader(originalFile));
