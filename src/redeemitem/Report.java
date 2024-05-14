@@ -19,6 +19,7 @@ public abstract class Report {
    
    public abstract void generateReport();
    public void fetchRedemptionData(){
+
             try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\Jason Paw\\OneDrive - student.tarc.edu.my\\Documents\\GitHub\\java100marks\\src\\data\\redemptionDetails.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -27,6 +28,7 @@ public abstract class Report {
                 int quantityRedeemed = Integer.parseInt(parts[4].substring(parts[4].indexOf(":") + 2));
                 redeemedItemsCount.put(redeemedItem, redeemedItemsCount.getOrDefault(redeemedItem, 0) + 1);
                 redeemedItemsQuantity.put(redeemedItem, redeemedItemsQuantity.getOrDefault(redeemedItem, 0) + quantityRedeemed);
+
             }
         } catch (IOException e) {
             System.err.println("Error occurred while reading redeem_data.txt: " + e.getMessage());

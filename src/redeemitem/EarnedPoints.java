@@ -16,73 +16,68 @@ import java.time.format.DateTimeFormatter;
 public class EarnedPoints {
 
     public static int fetchCustomerPoints(int userId) {
-        int points = 0;
         String filePath = "C:\\Users\\ladym\\Documents\\GitHub\\java100marks\\src\\data\\customers.txt";
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             boolean foundUserId = false;
             while ((line = br.readLine()) != null) {
                 if (foundUserId) {
-                    // Check if the line starts with "Total Points Earned: "
                     if (line.startsWith("Total Points Earned: ")) {
-                        // Extract the numeric part after "Total Points Earned: "
-                        points = Integer.parseInt(line.substring("Total Points Earned: ".length()));
-                        break; // Exit the loop once points are found
+                        return Integer.parseInt(line.substring("Total Points Earned: ".length()));
                     }
                 } else if (line.startsWith("User ID: " + userId)) {
-                    foundUserId = true; // Mark that we've found the user ID
+                    foundUserId = true;
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return points;
+        return 0;
     }
 
     public static void updateCustomerPoints(int userId, int additionalPoints) {
         Path filePath = Paths.get("C:\\Users\\ladym\\Documents\\GitHub\\java100marks\\src\\data\\customers.txt");
         try {
             List<String> lines = Files.readAllLines(filePath, StandardCharsets.UTF_8);
-            boolean pointsUpdated = false;
+            boolean userFound = false;
             for (int i = 0; i < lines.size(); i++) {
                 String line = lines.get(i);
                 if (line.startsWith("User ID: " + userId)) {
-                    String pointsLine = lines.get(i + 4);
-                    if (pointsLine.startsWith("Total Points Earned: ")) {
-                        int oldPoints = Integer.parseInt(pointsLine.substring("Total Points Earned: ".length()));
-                        lines.set(i + 4, "Total Points Earned: " + (oldPoints + additionalPoints));
-                        pointsUpdated = true;
-                    }
-                    // Update expiry date or add if not present
-                    if (lines.size() > i + 5 && lines.get(i + 5).startsWith("Expiry Date: ")) {
-                        lines.set(i + 5, "Expiry Date: " + LocalDate.now().plusDays(90).format(DateTimeFormatter.ISO_DATE));
-                    } else {
-                        lines.add(i + 5, "Expiry Date: " + LocalDate.now().plusDays(90).format(DateTimeFormatter.ISO_DATE));
+                    userFound = true;
+                    // Look for the Total Points Earned line
+                    for (int j = i + 1; j < lines.size(); j++) {
+                        if (lines.get(j).startsWith("Total Points Earned: ")) {
+                            int oldPoints = Integer.parseInt(lines.get(j).substring("Total Points Earned: ".length()));
+                            int newPoints = oldPoints + additionalPoints;
+                            lines.set(j, "Total Points Earned: " + newPoints);
+
+                            // Update expiry date or add if not present
+                            if (j + 1 < lines.size() && lines.get(j + 1).startsWith("Expiry Date: ")) {
+                                lines.set(j + 1, "Expiry Date: " + LocalDate.now().plusDays(90).format(DateTimeFormatter.ISO_DATE));
+                            } else {
+                                lines.add(j + 1, "Expiry Date: " + LocalDate.now().plusDays(90).format(DateTimeFormatter.ISO_DATE));
+                            }
+                            break;
+                        }
                     }
                     break;
                 }
             }
-            if (!pointsUpdated) {
-                lines.add("User ID: " + userId);
-                lines.add("Total Points Earned: " + additionalPoints);
-                lines.add("Expiry Date: " + LocalDate.now().plusDays(90).format(DateTimeFormatter.ISO_DATE));
-            }
 
-            Files.write(filePath, lines, StandardCharsets.UTF_8);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public static void earnedPoint(int userId) {
-        String filePath = "C:\\Users\\ladym\\Documents\\GitHub\\java100marks\\src\\data\\customers.txt ";
-        int totalEarnedPoints = getTotalEarnedPoints(filePath, userId);
-        if (totalEarnedPoints == -1) {
+        String filePath = "C:\\Users\\ladym\\Documents\\GitHub\\java100marks\\src\\data\\customers.txt";
+        int totalEarnedPoints = fetchCustomerPoints(userId);
+        if (totalEarnedPoints == 0) {
             System.out.println("User with ID " + userId + " not found.");
             return;
         }
 
-        // Your logic here using totalEarnedPoints
+        System.out.println("Total Points Earned for user " + userId + ": " + totalEarnedPoints);
     }
 
     private static int getTotalEarnedPoints(String filePath, int userId) {
@@ -114,11 +109,18 @@ public class EarnedPoints {
             for (int i = 0; i < lines.size(); i++) {
                 String line = lines.get(i);
                 if (line.startsWith("User ID: " + userId)) {
-                    // Find the line that contains the total points earned
-                    for (int j = i + 3; j < lines.size(); j++) {
-                        if (lines.get(j).startsWith("Total Points Earned: ")) {
-                            lines.set(j, "Total Points Earned: " + newPoints);
-                            pointsUpdated = true;
+                    // Assuming the next line after User ID is the User Name
+                    // You might need to adjust this logic based on your actual data structure
+                    for (int j = i + 1; j < lines.size(); j++) {
+                        if (lines.get(j).startsWith("User Name: ")) {
+                            // Now we know we're within the user's block, let's find the Total Points Earned line
+                            for (int k = j + 1; k < lines.size(); k++) {
+                                if (lines.get(k).startsWith("Total Points Earned: ")) {
+                                    lines.set(k, "Total Points Earned: " + newPoints);
+                                    pointsUpdated = true;
+                                    break;
+                                }
+                            }
                             break;
                         }
                     }
