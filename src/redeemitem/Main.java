@@ -331,7 +331,7 @@ public class Main {
                     switch (genereport_ans) {
                         case 1:
                             // Generate member customer report
-                            classicReport.fetchRedemptionData();
+                            classicReport.fetchCustomerData();
                             classicReport.generateReport();
                             //Create a loop
                             do {
@@ -369,7 +369,7 @@ public class Main {
                             break;
                         case 2:
                             // Generate Silver customer report
-                            silverReport.fetchRedemptionData();
+                            silverReport.fetchCustomerData();
                             silverReport.generateReport();
                             do {
                                 try{
@@ -406,7 +406,7 @@ public class Main {
                             break;
                         case 3:
                             // Generate Gold customer report
-                            goldReport.fetchRedemptionData();
+                            goldReport.fetchCustomerData();
                             goldReport.generateReport();
                             do {
                                 try{
@@ -495,6 +495,6 @@ public class Main {
                }//the loop will stop when contGeneReport is false
             while(contGeneReport);  
          
-    }    
+    }     
 
 }

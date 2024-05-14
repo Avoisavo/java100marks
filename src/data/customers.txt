@@ -1,3 +1,10 @@
+User ID: 199
+User Name: Welcome
+IC: 036598745213
+Phone Number: 0147859641
+Loyalty Status: Gold
+Total Points Earned: 5000
+
 User ID: 608
 User Name: lh
 IC: 132549874562
@@ -25,3 +32,5 @@ IC: 036598745213
 Phone Number: 0147859641
 Loyalty Status: Silver
 Total Points Earned: 90
+
+
