@@ -15,7 +15,6 @@ public abstract class Report {
    protected Map<String, Integer> pointsMap = new HashMap<>();
    protected Map<String, Integer> redeemedItemsQuantity = new HashMap<>();
    protected int totalPointsRedeemed = 0;
-   protected Map<String, Integer> pointsByUser = new HashMap<>();
    
    public abstract void generateReport();
    
