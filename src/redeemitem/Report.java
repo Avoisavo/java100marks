@@ -72,10 +72,10 @@ public abstract class Report {
     // Override generateReport method
      @Override
     public void generateReport() {
-        String header = String.format("%-10s | %-15s | %-20s", "User ID", "User Name", "Total Points Earned");
+        String header = String.format("%-10s | %-15s | %-20s", "|User ID", "User Name", "Total Points Earned|");
         String separator = new String(new char[header.length()]).replace('\0', '-');
-
-        System.out.println("\nGold Status Report:");
+        System.out.println("\n"+separator);
+        System.out.println("|               Gold Status Report                |");
         System.out.println(separator);
         System.out.println(header);
         System.out.println(separator);
@@ -87,10 +87,10 @@ public abstract class Report {
                 String userName = userNamesMap.get(entry.getKey());
                 int pointsEarned = entry.getValue();
                 totalPoints += pointsEarned;
-                System.out.println(String.format("%-10s | %-15s | %-20d", userId, userName, pointsEarned));
+                System.out.println("|"+String.format("%-9s | %-15s | %-19d", userId, userName, pointsEarned)+"|");
             }
         }
-        System.out.println("-----------------------------------------------------");
+        System.out.println(separator);
         System.out.println("\nTotal Points Earned by All Gold Customer: " + totalPoints + "\n");
     }
 }
@@ -100,11 +100,11 @@ public abstract class Report {
  class SilverStatusReport extends Report {
     // Override generateReport method
     @Override
-    public void generateReport() {
-        String header = String.format("%-10s | %-15s | %-20s", "User ID", "User Name", "Total Points Earned");
+        public void generateReport() {
+        String header = String.format("%-10s | %-15s | %-20s", "|User ID", "User Name", "Total Points Earned|");
         String separator = new String(new char[header.length()]).replace('\0', '-');
-
-        System.out.println("\nSilver Status Report:");
+        System.out.println("\n"+separator);
+        System.out.println("|             Silver Status Report                |");
         System.out.println(separator);
         System.out.println(header);
         System.out.println(separator);
@@ -116,11 +116,11 @@ public abstract class Report {
                 String userName = userNamesMap.get(entry.getKey());
                 int pointsEarned = entry.getValue();
                 totalPoints += pointsEarned;
-                System.out.println(String.format("%-10s | %-15s | %-20d", userId, userName, pointsEarned));
+                System.out.println("|"+String.format("%-9s | %-15s | %-19d", userId, userName, pointsEarned)+"|");
             }
         }
-        System.out.println("-----------------------------------------------------");
-        System.out.println("\nTotal Points Earned by All Silver Customer: " + totalPoints + "\n");
+        System.out.println(separator);
+        System.out.println("\nTotal Points Earned by All Gold Customer: " + totalPoints + "\n");
     }
 }
 
@@ -129,11 +129,11 @@ public abstract class Report {
  class ClassicStatusReport extends Report {
     // Override generateReport method
     @Override
-    public void generateReport() {
-        String header = String.format("%-10s | %-15s | %-20s", "User ID", "User Name", "Total Points Earned");
+        public void generateReport() {
+        String header = String.format("%-10s | %-15s | %-20s", "|User ID", "User Name", "Total Points Earned|");
         String separator = new String(new char[header.length()]).replace('\0', '-');
-
-        System.out.println("\nClassic Status Report:");
+        System.out.println("\n"+separator);
+        System.out.println("|            Classic Status Report                |");
         System.out.println(separator);
         System.out.println(header);
         System.out.println(separator);
@@ -145,11 +145,11 @@ public abstract class Report {
                 String userName = userNamesMap.get(entry.getKey());
                 int pointsEarned = entry.getValue();
                 totalPoints += pointsEarned;
-                System.out.println(String.format("%-10s | %-15s | %-20d", userId, userName, pointsEarned));
+                System.out.println("|"+String.format("%-9s | %-15s | %-19d", userId, userName, pointsEarned)+"|");
             }
         }
-        System.out.println("-----------------------------------------------------");
-        System.out.println("\nTotal Points Earned by All Classic Customer: " + totalPoints + "\n");
+        System.out.println(separator);
+        System.out.println("\nTotal Points Earned by All Gold Customer: " + totalPoints + "\n");
     }
 }
 
@@ -159,14 +159,20 @@ class RedemptionSummary extends Report {
     // Override generateReport method
     @Override
     public void generateReport() {
-        System.out.println("--------------------------------");
-        System.out.println("|Redemption Item Summary Report|");
-        System.out.println("--------------------------------");
+        String header = String.format("%-10s | %-15s | %-20s", "|Redeemed Items", "Total Count Redeemed", "Total Redeemed Amount|");
+        String separator = new String(new char[header.length()]).replace('\0', '-');
+        
+        System.out.println("\n---------------------------------------------------------------");
+        System.out.println("|               Redemption Item Summary Report                |");
+        System.out.println(separator);
+        System.out.println(header);
+        System.out.println(separator);
         for (Map.Entry<String, Integer> entry : redeemedItemsCount.entrySet()) {
             String redeemedItem = entry.getKey();
             int quantityRedeemed = redeemedItemsQuantity.getOrDefault(redeemedItem, 0);
             int countRedeemed = entry.getValue();
-            System.out.print("Redeemed Items("+redeemedItem + ") \nTotal Count Redeemed: " + countRedeemed + "\nTotal Redeemed Amount: " + quantityRedeemed+"\n\n");
-        }
+            System.out.println(String.format("|"+"%-14s | %-20s | %-21s", redeemedItem, countRedeemed, quantityRedeemed)+"|");
+            
+        }System.out.println("---------------------------------------------------------------\n");
     }
 }
