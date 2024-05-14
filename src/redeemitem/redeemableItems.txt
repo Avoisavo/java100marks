@@ -1,7 +1,2 @@
-<<<<<<< Updated upstream
-1|Jeans|100|8
-2|Hat|20|5
-3|Glasses|30|6
-=======
-1|Jeans|100|99888
->>>>>>> Stashed changes
+1|apple|10|5
+2|huhu|10|10

@@ -71,7 +71,7 @@ public class Main {
         System.out.println("Program ended.");
     }
 
-    public static int getIntInput() {
+   public static int getIntInput() {
         int choice = 0;
         try {
             choice = scanner.nextInt();
@@ -83,14 +83,15 @@ public class Main {
     }
 
     public static void registerCustomer() {
-        // Create a new customer
         Customer customer = CustomerRegistration.createCustomer();
-
-        // Print "Customer created"
-        System.out.println("Customer created");
-
-        // Register the customer
+        if (customer == null) {
+            System.out.println("Registration cancelled by the user.");
+            return; // Return to the main menu or handle as needed
+        }
+        else{
+        // Proceed with registration
         CustomerRegistration.registerCustomer(customer);
+        }
     }
 
     public static void logIn() {
@@ -102,16 +103,17 @@ public class Main {
             // Set the logged-in user ID
             loggedInUserId = Integer.parseInt(loggedInCustomer.getId());
             System.out.println("Customer details:");
+            System.out.println("ID: " + loggedInUserId);
             System.out.println("Name: " + loggedInCustomer.getName());
             System.out.println("IC: " + loggedInCustomer.getIc());
             System.out.println("Phone: " + loggedInCustomer.getPhone());
+            System.out.println("Loyalty Status: " + loggedInCustomer.getLoyaltyStatus());
             System.out.println("Points: " + loggedInCustomer.getPoints());
-            System.out.println("ID: " + loggedInUserId);
+
         } else {
             System.out.println("Login failed. Please try again.");
         }
     }
-
     public static void updateCustomer() {
         if (loggedInCustomer == null) {
             System.out.println("Please login first");
@@ -145,7 +147,7 @@ public class Main {
     }
 
     public static void earnedPoint() {
-if (loggedInCustomer == null) {
+    if (loggedInCustomer == null) {
         System.out.println("Please log in first.");
         return;
     }
@@ -173,33 +175,28 @@ if (loggedInCustomer == null) {
         int currentPoints = EarnedPoints.fetchCustomerPoints(loggedInUserId);
         System.out.println("Current points for user " + loggedInUserId + ": " + currentPoints);
 
-        // Fetching loyalty status for the logged-in user
         LoyaltyStatus loyaltyStatus = new LoyaltyStatus();
         loyaltyStatus.readLoyaltyStatusFromFile(loggedInUserId);
         String status = loyaltyStatus.getStatus(loggedInUserId);
 
-        // Determine the number of points to add based on the loyalty status
         int additionalPoints = 0;
         if (status.equals("Gold")) {
             additionalPoints = 20;
         } else if (status.equals("Silver")) {
             additionalPoints = 5;
         }
-
-        // Add additional points based on the loyalty status
         EarnedPoints.updateCustomerPoints(loggedInUserId, additionalPoints);
-
-        // Fetch updated points after adding loyalty status points
         int finalUpdatedPoints = EarnedPoints.fetchCustomerPoints(loggedInUserId);
         System.out.println("Final updated points for user " + loggedInUserId + ": " + finalUpdatedPoints);
     }
-            }
+}
 
     public static void redeemPoints() {
         if (loggedInCustomer == null) {
             System.out.println("Please log in first.");
             return;
         }
+         System.out.println("Your ID: " + loggedInUserId);
         RedemptionManager RM = new RedemptionManager();
         RedeemFileUtils.loadItems();
 

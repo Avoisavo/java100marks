@@ -51,25 +51,30 @@ public class ShoppingCart {
         }
     }
 
-    public List<Product> selectProducts(Scanner scanner) {
-        boolean continueAdding = true;
+public List<Product> selectProducts(Scanner scanner) {
+    boolean continueAdding = true;
 
-        while (continueAdding) {
-            displayAvailableProducts();
-            System.out.print("Enter the number of the item you want to purchase or 0 to finish: ");
+    while (continueAdding) {
+        displayAvailableProducts();
+        System.out.print("Enter the number of the item you want to purchase or 0 to finish: ");
+        if (scanner.hasNextInt()) {
             int selectedItem = scanner.nextInt();
-
-            if (selectedItem >= 1 && selectedItem <= Product.getAvailableProducts().size()) {
+            if (selectedItem >= 1 && selectedItem <= 3) {
                 selectedProducts.add(Product.getAvailableProducts().get(selectedItem - 1));
                 System.out.println("Item added to cart.");
             } else if (selectedItem == 0) {
                 continueAdding = false;
             } else {
-                System.out.println("Invalid selection.");
+                System.out.println("Invalid selection. Please enter a number between 1 and 3.");
             }
+        } else {
+            System.out.println("Invalid input. Please enter a number.");
+            scanner.next(); // Consume the invalid input
         }
-        return selectedProducts;
     }
+    return selectedProducts;
+}
+
 
     public double calculateTotalPrice() {
         double totalPrice = 0;
@@ -88,29 +93,4 @@ public class ShoppingCart {
     }
 }
 
-class Product {
-    private double price;
-    private int pointsEarned;
-
-    public Product(double price, int pointsEarned) {
-        this.price = price;
-        this.pointsEarned = pointsEarned;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public int getPointsEarned() {
-        return pointsEarned;
-    }
-
-    public static List<Product> getAvailableProducts() {
-        List<Product> products = new ArrayList<>();
-        products.add(new Product(10.50, 10));
-        products.add(new Product(20.99, 20));
-        products.add(new Product(15.99, 15));
-        return products;
-    }
-}
 

@@ -73,7 +73,7 @@ class Gold extends LoyaltyStatus {
         System.out.println("");
         System.out.println("-----Your Loyalty Status----");
         System.out.println("Your Loyalty Status is Gold!");
-        System.out.println("Your points reward : 20");
+        System.out.println("Your points reward is 1.5x points!");
         System.out.println("");
 
     }
@@ -84,7 +84,7 @@ class Silver extends LoyaltyStatus {
         System.out.println("");
         System.out.println("-----Your Loyalty Status----");
         System.out.println("Your Loyalty Status is Silver!");
-        System.out.println("Your points reward : 5");
+        System.out.println("Your points reward is 1.2x points!");
         System.out.println("");
     }
 }

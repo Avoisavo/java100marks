@@ -1,52 +1,60 @@
-package redeemitem; // please put it under customer module
+package redeemitem; 
 
-import java.io.BufferedReader;
+
 import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
 import java.util.regex.Pattern;
 import java.util.InputMismatchException;
 import java.util.Random;
+
 /**
  *
  * @author Linghue Wee
  */
-       
 public class CustomerRegistration {
-    
+
     public static Customer createCustomer() {
-    boolean isValidCustomer = false;
-    Customer customer = null;
+        boolean isValidCustomer = false;
+        Customer customer = null;
 
-    while (!isValidCustomer) {
-        String name = getInput("Enter user name : ", "^[a-zA-Z]+$", "Invalid name format. Please enter alphabets only.");
-        String ic = getInput("Enter user ic : ", "^\\d{12}$", "Invalid IC format. Please enter 12 digits.");
-        String phone = getInput("Enter user phone : ", "^[0-9]{10}$", "Invalid phone format. Please enter 10 digits.");
+        while (!isValidCustomer) {
+            String name = getInput("Enter user name : ", "^[a-zA-Z]+$", "Invalid name format. Please enter alphabets only.");
+            if (name == null) { 
+                return null; 
+            }
 
-        // Validate customer details
-        if (!Pattern.matches("^[a-zA-Z]+$", name)) {
-            System.out.println("Invalid name format. Please enter alphabets only.");
-            continue;
-        }
-        if (!Pattern.matches("^\\d{12}$", ic)) {
-            System.out.println("Invalid IC format. Please enter 12 digits.");
-            continue;
-        }
-        if (!Pattern.matches("^[0-9]{10}$", phone)) {
-            System.out.println("Invalid phone format. Please enter 10 digits.");
-            continue;
-        }
+            String ic = getInput("Enter user ic : ", "^\\d{12}$", "Invalid IC format. Please enter 12 digits.");
+            if (ic == null) { 
+                return null; 
+            }
 
-        // If all details are valid, create the customer
-        customer = new Customer(name, ic, phone);
-        isValidCustomer = true;
+            String phone = getInput("Enter user phone : ", "^[0-9]{10}$", "Invalid phone format. Please enter 10 digits.");
+            if (phone == null) { 
+                return null; 
+            }
+
+            // Validate customer details
+            if (!Pattern.matches("^[a-zA-Z]+$", name)) {
+                System.out.println("Invalid name format. Please enter alphabets only.");
+                continue;
+            }
+            if (!Pattern.matches("^\\d{12}$", ic)) {
+                System.out.println("Invalid IC format. Please enter 12 digits.");
+                continue;
+            }
+            if (!Pattern.matches("^[0-9]{10}$", phone)) {
+                System.out.println("Invalid phone format. Please enter 10 digits.");
+                continue;
+            }
+
+            // If all details are valid, create the customer
+            customer = new Customer(name, ic, phone);
+            isValidCustomer = true;
+        }
+        return customer;
     }
-    return customer;
-}
-       
+
     public static String getInput(String message, String pattern, String errorMessage) {
         String input;
         boolean isValidInput = false;
@@ -68,8 +76,7 @@ public class CustomerRegistration {
                         try {
                             choice = Main.scanner.nextInt();
                             if (choice == 0) {
-                                System.out.println("Exiting the program...");
-                                System.exit(0); // Signal to exit
+                                return null; // Return null to indicate cancellation
                             } else if (choice == 1) {
                                 break; // Exit the loop to allow retrying input
                             } else {
@@ -83,8 +90,7 @@ public class CustomerRegistration {
                     attempts = 0; // Reset the attempt counter
                 }
             }
-        } while (!isValidInput);
-
+        } while (!isValidInput && !input.equals("0")); // Exit the loop if input is '0'
 
         return input;
     }
@@ -101,6 +107,7 @@ public class CustomerRegistration {
             writer.write("Phone Number: " + customer.getPhone() + "\n");
             writer.write("Loyalty Status: " + customer.getLoyaltyStatus() + "\n");
             writer.write("Total Points Earned: " + customer.getPoints() + "\n\n");
+            
 
             System.out.println("Customer information written to file successfully.");
         } catch (IOException e) {
@@ -114,5 +121,3 @@ public class CustomerRegistration {
         return random.nextInt(900) + 100; // Generates a random number between 100 and 999
     }
 }
-    
-  

@@ -2,3 +2,9 @@ User ID: 123, Transaction ID: 298490, Redeemed Item: Jeans, Total Points Redeeme
 User ID: 123, Transaction ID: 585122, Redeemed Item: Jeans, Total Points Redeemed: 500, Quantity Redeemed: 3, Redemption Date: 2024-05-13 23:57:24
 User ID: 124, Transaction ID: 123456, Redeemed Item: Ruler, Total Points Redeemed: 1000, Quantity Redeemed: 5, Redemption Date: 2023-09-13 23:39:22User ID: 199, Transaction ID: 995148, Redeemed Item: Jeans, Total Points Redeemed: 4800, Quantity Redeemed: 2, Redemption Date: 2024-05-14 15:09:05
 User ID: 199, Transaction ID: 453838, Redeemed Item: Jeans, Total Points Redeemed: 4600, Quantity Redeemed: 2, Redemption Date: 2024-05-14 15:10:22
+User ID: 199, Transaction ID: 278026, Redeemed Item: Apple, Total Points Redeemed: 0, Quantity Redeemed: 5, Redemption Date: 2024-05-14 20:45:00
+User ID: 199, Transaction ID: 150179, Redeemed Item: hat, Total Points Redeemed: 10271, Quantity Redeemed: 5, Redemption Date: 2024-05-14 20:53:22
+User ID: 188, Transaction ID: 932481, Redeemed Item: hat, Total Points Redeemed: 0, Quantity Redeemed: 1, Redemption Date: 2024-05-14 21:05:56
+User ID: 188, Transaction ID: 309136, Redeemed Item: hat, Total Points Redeemed: 0, Quantity Redeemed: 1, Redemption Date: 2024-05-14 21:06:40
+User ID: 188, Transaction ID: 510553, Redeemed Item: huhu, Total Points Redeemed: 0, Quantity Redeemed: 1, Redemption Date: 2024-05-14 21:07:28
+User ID: 199, Transaction ID: 277804, Redeemed Item: apple, Total Points Redeemed: 10251, Quantity Redeemed: 5, Redemption Date: 2024-05-14 21:15:27

@@ -18,17 +18,18 @@ public class Product {
     public double getPrice() {
         return price;
     }
+    
 
     public int getPointsEarned() {
         return pointsEarned;
     }
-
+    private String apple;
   // please set this as a static variable in this class and return the static variable in this method
     public static List<Product> getAvailableProducts() {
         List<Product> products = new ArrayList<>();
-        products.add(new Product(10.50, 10)); // Example userId
-        products.add(new Product(20.99, 20)); // Example userId
-        products.add(new Product(15.99, 15)); // Example userId
+        products.add(new Product(10.50, 10));
+        products.add(new Product(20.99, 20)); 
+        products.add(new Product(15.99, 15)); 
         return products;
     }
 

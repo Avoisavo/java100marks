@@ -11,7 +11,7 @@ public class RedeemFileUtils {
     private static ArrayList<Integer> quantity = new ArrayList<>();
     private static ArrayList<Integer> itemIndices = new ArrayList<>(); // Added for tracking item indices
     private static Scanner scanner = new Scanner(System.in);
-    private static final String itemList = "C:\\Users\\ladym\\Documents\\GitHub\\java100marks\\src\\data\\redeemableItems.txt";
+    private static final String itemList = "src/redeemitem/redeemableItems.txt";
     private static int lastAddedItemIndex = 1;
 
     public static void addItems(Scanner scanner) {
@@ -202,7 +202,7 @@ public class RedeemFileUtils {
 
     public static String getItemName(int userId) {
         String itemName = "";
-        try (BufferedReader reader = new BufferedReader(new FileReader("redemptionDetails.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/redeemitem/redemptionDetails.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 if (line.contains("User ID: " + userId)) {
@@ -224,7 +224,7 @@ public class RedeemFileUtils {
 
     public static int getQuantityRedeemed(int userId) {
         int quantityRedeemed = 0;
-        try (BufferedReader reader = new BufferedReader(new FileReader("redemptionDetails.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/redeemitem/redemptionDetails.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 if (line.contains("User ID: " + userId)) {

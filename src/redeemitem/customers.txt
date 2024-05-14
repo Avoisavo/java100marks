@@ -3,8 +3,7 @@ User Name: Welcome
 IC: 036598745213
 Phone Number: 0147859641
 Loyalty Status: Gold
-Total Points Earned: 4600
-Total Points Earned: 10321
+Total Points Earned: 10251
 Expiry Date: 2024-08-12
 
 
@@ -13,7 +12,7 @@ User Name: lh
 IC: 132549874562
 Phone Number: 0213654789
 Loyalty Status: Classic
-Total Points Earned: 0
+Total Points Earned: 10
 Expiry Date: 2024-08-12
 
 
@@ -22,7 +21,7 @@ User Name: fishfish
 IC: 036598745213
 Phone Number: 0147859641
 Loyalty Status: Gold
-Total Points Earned: 510
+Total Points Earned: 540
 Expiry Date: 2024-08-12
 
 
@@ -32,7 +31,7 @@ User Name: hello
 IC: 123456121234
 Phone Number: 1234567897
 Loyalty Status: Gold
-Total Points Earned: 593
+Total Points Earned: 653
 Expiry Date: 2024-08-12
 
 
@@ -58,14 +57,21 @@ User Name: why
 IC: 123456121234
 Phone Number: 1234567898
 Loyalty Status: Classic
-Total Points Earned: 10
+Total Points Earned: 20
 Expiry Date: 2024-08-12
 
-User ID: 604
-User Name: o
-IC: 123456121234
-Phone Number: 1234567897
+
+User ID: 785
+User Name: huhu
+IC: 032154789563
+Phone Number: 1111111111
 Loyalty Status: Classic
-Total Points Earned: 2060
+Total Points Earned: 0
+User ID: 188
+User Name: lol
+IC: 123456121234
+Phone Number: 0123456789
+Loyalty Status: Classic
+Total Points Earned: 0
 Expiry Date: 2024-08-12
 

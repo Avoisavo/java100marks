@@ -42,7 +42,7 @@ public class RedemptionManager {
 
     private void saveRedemptionDetails(int userId, int transactionId, int totalPoints, String redemptionDate, String itemName, int quantityRedeemed) {
         try {
-            FileWriter writer = new FileWriter("C:\\Users\\ladym\\Documents\\GitHub\\java100marks\\src\\data\\redemptionDetails.txt", true); // Append mode
+            FileWriter writer = new FileWriter("src/redeemitem/redemptionDetails.txt", true); // Append mode
             writer.write("User ID: " + userId + ", Transaction ID: " + transactionId + ", Redeemed Item: " + itemName + ", Total Points Redeemed: " + totalPoints + ", Quantity Redeemed: " + quantityRedeemed + ", Redemption Date: " + redemptionDate + "\n");
             writer.close();
         } catch (IOException e) {

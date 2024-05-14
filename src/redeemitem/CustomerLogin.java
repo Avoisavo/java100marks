@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 
 public class CustomerLogin {
-    // please rethink the approach for this method, there is an easier way to do this
     public static Customer findCustomer(String name, String ic) {
         for (Customer customer : Customer.getCustomers()) {
             if (customer.getName().equalsIgnoreCase(name) && customer.getIc().equals(ic)) {
@@ -28,8 +27,12 @@ public class CustomerLogin {
 
         while (!loggedIn) {
             String name = CustomerRegistration.getInput("Enter user name : ", "^[a-zA-Z]+$", "Invalid name format. Please enter alphabets only.");
-
+            if (name == null) { 
+                return null;}
             String ic = CustomerRegistration.getInput("Enter user ic : ", "^\\d{12}$", "Invalid IC format. Please enter 12 digits.");
+            if (ic == null) { 
+                return null; 
+            }
             try (Scanner fileScanner = new Scanner(new File("src/redeemitem/customers.txt"))) {
                 while (fileScanner.hasNextLine()) {
                     String line = fileScanner.nextLine();
@@ -59,15 +62,7 @@ public class CustomerLogin {
 
                                 if (customerName != null && customerIc != null && phone != null) {
                                     if (customerName.equalsIgnoreCase(name) && customerIc.equals(ic)) {
-                                        System.out.println("Logged in successfully!");
-                                        System.out.println("Customer details:");
-                                        System.out.println("User ID: " + userId);
-                                        System.out.println("Name: " + customerName);
-                                        System.out.println("IC: " + customerIc);
-                                        System.out.println("Phone: " + phone);
-                                        System.out.println("Loyalty Status: " + loyaltyStatus);
-                                        System.out.println("Points: " + points);
-                                        customer = new Customer(userId, customerName, customerIc, phone, points);
+                                        customer = new Customer(userId, customerName, customerIc, phone,loyaltyStatus,points);
                                         loggedIn = true; // Set the flag to true
                                     }
                                 }
@@ -85,7 +80,11 @@ public class CustomerLogin {
                 System.out.println("Customer not found. Please try again.");
             }
         }
+
         return customer; // Return the logged-in customer
     }
+
+
+
 }
 

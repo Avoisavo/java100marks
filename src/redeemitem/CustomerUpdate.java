@@ -1,4 +1,4 @@
-package redeemitem; // please put it under customer module
+package redeemitem; 
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -16,22 +16,30 @@ import java.util.List;
 public class CustomerUpdate {
     
     public static void updateName(Customer loggedInCustomer) {
-        String newName = CustomerRegistration.getInput("Enter user name : ", "^[a-zA-Z]+$", "Invalid name format. Please enter alphabets only.");
-        loggedInCustomer.setName(newName);
-        System.out.println("Name updated successfully!");
-        updateFile(loggedInCustomer);
+            String newName = CustomerRegistration.getInput("Enter user name: ", "^[a-zA-Z]+$", "Invalid name format. Please enter alphabets only.");
+            if (newName != null) {
+                loggedInCustomer.setName(newName);
+                System.out.println("Name updated successfully!");
+                updateFile(loggedInCustomer);
+            } else {
+                System.out.println("Update failed. Name not changed.");
+            }
     }
     
     public static void updatePhone(Customer loggedInCustomer) {
-        String newPhone = CustomerRegistration.getInput("Enter user phone : ", "^[0-9]{10}$", "Invalid phone format. Please enter 10 digits.");
-        loggedInCustomer.setPhone(newPhone);
-        System.out.println("Phone number updated successfully!");
-        updateFile(loggedInCustomer);
+        String newPhone = CustomerRegistration.getInput("Enter user phone: ", "^[0-9]{10}$", "Invalid phone format. Please enter 10 digits.");
+        if (newPhone != null) {
+            loggedInCustomer.setPhone(newPhone);
+            System.out.println("Phone number updated successfully!");
+            updateFile(loggedInCustomer);
+        } else {
+            System.out.println("Update failed. Phone number not changed.");
+        }
     }
      
     private static void updateFile(Customer updatedCustomer) {
         File originalFile = new File("src/redeemitem/customers.txt");
-        File tempFile = new File("src/data/temp_customers.txt");
+        File tempFile = new File("src/redeemitem/temp_customers.txt");
 
         try (BufferedReader reader = new BufferedReader(new FileReader(originalFile));
              BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile))) {
@@ -51,7 +59,7 @@ public class CustomerUpdate {
 
                     writer.write("Phone Number: " + updatedCustomer.getPhone());
                     writer.newLine();
-                    reader.readLine(); // Skip the old phone number line
+                    reader.readLine(); 
 
                     String loyaltyStatusLine = reader.readLine();
                     writer.write(loyaltyStatusLine); // Loyalty Status line

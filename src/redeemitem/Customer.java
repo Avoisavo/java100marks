@@ -1,4 +1,4 @@
-package redeemitem; // please put it under "customer" module
+package redeemitem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,12 +27,13 @@ public class Customer {
         this.points = 0;
     }
     
-    // please put all constructors together at the top of the class
-    public Customer(String id, String name, String ic, String phone, int points) {
+    //  constructors 
+    public Customer(String id, String name, String ic, String phone, String loyaltyStatus,int points) {
         this.id = id;
         this.name = name;
         this.ic = ic;
         this.phone = phone;
+        this.loyaltyStatus=loyaltyStatus;
         this.points = points;
     }
     
@@ -44,6 +45,7 @@ public class Customer {
        this(name,"",""); 
     }
     
+    //setters and getters
     public String getId() {
         return id;
     }
@@ -63,8 +65,6 @@ public class Customer {
     public String getLoyaltyStatus() {
         return loyaltyStatus;
     }
-    
-    
 
     public int getPoints() {
         return points;
@@ -81,8 +81,6 @@ public class Customer {
     public void setLoyaltyStatus(String loyaltyStatus) {
         this.loyaltyStatus = loyaltyStatus;
     }
-
-
 
 
     @Override
