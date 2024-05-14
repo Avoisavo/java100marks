@@ -341,7 +341,7 @@ public class Main {
             do{
                 try{
                     //Provide user input and display the output of report menu.
-                    System.out.print("\n-------------------------------------------------------\nWhich report do you want to look?\n-------------------------------------------------------\n(1) Overall Classic Status Report  \n(2) Overall Silver Status Report \n(3) Overall Gold Status Report  \n(4) Redemption Item Summary Report \n(0) Cancel\nPlease enter in the range[0 to 4]: ");
+                    System.out.print("\n-------------------------------------------------------\nWhich report do you want to look?\n-------------------------------------------------------\n(1) Classic Status Report  \n(2) Silver Status Report \n(3) Gold Status Report  \n(4) Redemption Item Summary Report \n(0) Cancel\nPlease enter in the range[0 to 4]: ");
                     genereport_ans = scanner.nextInt();
 
                     switch (genereport_ans) {
