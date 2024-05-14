@@ -11,7 +11,7 @@ public class RedeemFileUtils {
     private static ArrayList<Integer> quantity = new ArrayList<>();
     private static ArrayList<Integer> itemIndices = new ArrayList<>(); // Added for tracking item indices
     private static Scanner scanner = new Scanner(System.in);
-    private static final String itemList = "C:\\Users\\ladym\\Documents\\GitHub\\java100marks\\src\\data\\redeemableItems.txt";
+    private static final String itemList = "/Users/avo/Documents/GitHub/java100marks/src/data/customers.txt";
     private static int lastAddedItemIndex = 1;
 
     public static void addItems(Scanner scanner) {

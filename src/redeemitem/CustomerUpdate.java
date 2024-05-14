@@ -29,56 +29,58 @@ public class CustomerUpdate {
         updateFile(loggedInCustomer);
     }
      
-private static void updateFile(Customer updatedCustomer) {
-    File originalFile = new File("src/data/customers.txt ");
-    File tempFile = new File("src/data/temp_customers.txt");
+    private static void updateFile(Customer updatedCustomer) {
+        File originalFile = new File("/Users/avo/Documents/GitHub/java100marks/src/data/customers.txt");
+        File tempFile = new File("src/data/temp_customers.txt");
 
-    try (BufferedReader reader = new BufferedReader(new FileReader(originalFile));
-         BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile))) {
-        // Read all the lines from the file
-        String line;
-        while ((line = reader.readLine()) != null) {
-            if (line.startsWith("User ID: " + updatedCustomer.getId())) {
-                // Update the line with the new customer name
-                writer.write("User ID: " + updatedCustomer.getId());
-                writer.newLine();
-                writer.write("User Name: " + updatedCustomer.getName());
-                writer.newLine();
-                reader.readLine(); // Skip the old name line
-                // Update the phone number line
-                writer.write("IC: " + updatedCustomer.getIc());
-                writer.newLine();
-                reader.readLine(); // Skip the old IC line
-                // Update the phone number line
-                writer.write("Phone Number: " + updatedCustomer.getPhone());
-                writer.newLine();
-                reader.readLine(); // Skip the old phone number line
-                // Add the unchanged points line
-                writer.write("Total Points Earned: " + updatedCustomer.getPoints());
-                writer.newLine();
-                reader.readLine(); // Skip the old points line
-            } else {
-                // Add the unchanged line to the temp file
-                writer.write(line);
-                writer.newLine();
+        try (BufferedReader reader = new BufferedReader(new FileReader(originalFile));
+             BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile))) {
+            // Read all the lines from the file
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (line.startsWith("User ID: " + updatedCustomer.getId())) {
+                    // Update the line with the new customer name
+                    writer.write("User ID: " + updatedCustomer.getId());
+                    writer.newLine();
+                    writer.write("User Name: " + updatedCustomer.getName());
+                    writer.newLine();
+                    reader.readLine(); // Skip the old name line
+
+                    writer.write(reader.readLine()); // IC line
+                    writer.newLine();
+
+                    writer.write("Phone Number: " + updatedCustomer.getPhone());
+                    writer.newLine();
+                    reader.readLine(); // Skip the old phone number line
+
+                    String loyaltyStatusLine = reader.readLine();
+                    writer.write(loyaltyStatusLine); // Loyalty Status line
+                    writer.newLine();
+
+                    writer.write(reader.readLine()); // Total Points Earned line
+                    writer.newLine();
+                } else {
+                    // Add the unchanged line to the temp file
+                    writer.write(line);
+                    writer.newLine();
+                }
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
         }
-    } catch (IOException e) {
-        e.printStackTrace();
-        return;
-    }
 
-    // Replace the original file with the temp file
-    if (originalFile.delete()) {
-        if (tempFile.renameTo(originalFile)) {
-            System.out.println("File updated successfully.");
+        // Replace the original file with the temp file
+        if (originalFile.delete()) {
+            if (tempFile.renameTo(originalFile)) {
+                System.out.println("File updated successfully.");
+            } else {
+                System.out.println("Failed to rename temp file.");
+            }
         } else {
-            System.out.println("Failed to rename temp file.");
+            System.out.println("Failed to delete original file.");
         }
-    } else {
-        System.out.println("Failed to delete original file.");
     }
-}
 
 
 }

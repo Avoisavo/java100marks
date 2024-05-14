@@ -2,15 +2,15 @@ User ID: 123
 User Name: zhiwei
 IC: 030303021111
 Phone Number: 0194785522
-Total Points Earned: 500
-Expiry Date: 2024-08-11
+Total Points Earned: 4070
+Expiry Date: 2024-08-12
 
 User ID: 403
 User Name: avp
 IC: 030303020000
 Phone Number: 0154782255
-Total Points Earned: 10
-Expiry Date: 2024-08-11
+Total Points Earned: 105
+Expiry Date: 2024-08-12
 
 User ID: 880
 User Name: avo

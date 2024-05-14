@@ -171,10 +171,20 @@ public class Main {
             int totalPointsEarned = cart.calculateTotalPointsEarned();
             LocalDate earningDate = LocalDate.now(); // Current date
 
-            System.out.println("Earned " + totalPointsEarned + " points on " + earningDate);
+           // Log earned points and date
+           System.out.println("Earned " + totalPointsEarned + " points on " + earningDate);
 
-            // Updating customer's points in the system
-            EarnedPoints.updateCustomerPoints(loggedInUserId, loggedInCustomerPoints + totalPointsEarned);
+           // Update customer's points in the system
+           EarnedPoints.updateCustomerPoints(loggedInUserId, totalPointsEarned);
+
+           // Fetch current points
+           int currentPoints = EarnedPoints.fetchCustomerPoints(loggedInUserId);
+           System.out.println("Current points for user " + loggedInUserId + ": " + currentPoints);
+
+
+           // Fetch updated points
+           int updatedPoints = EarnedPoints.fetchCustomerPoints(loggedInUserId);
+           System.out.println("Updated points for user " + loggedInUserId + ": " + updatedPoints);
         }
     }
 
