@@ -20,7 +20,7 @@ public abstract class Report {
    public abstract void generateReport();
    public void fetchRedemptionData(){
 
-            try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\Jason Paw\\OneDrive - student.tarc.edu.my\\Documents\\GitHub\\java100marks\\src\\data\\redemptionDetails.txt"))) {
+            try (BufferedReader reader = new BufferedReader(new FileReader("/Users/avo/Documents/GitHub/java100marks/src/data/redemptionDetails.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(", ");
@@ -37,7 +37,7 @@ public abstract class Report {
 
    
    public void fetchCustomerData() {
-        try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\Jason Paw\\OneDrive - student.tarc.edu.my\\Documents\\GitHub\\java100marks\\src\\data\\customers.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("/Users/avo/Documents/GitHub/java100marks/src/data/customers.txt"))) {
 
             String line;
             String userId = "";
