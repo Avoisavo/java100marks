@@ -10,7 +10,8 @@ User Name: fishfish
 IC: 036598745213
 Phone Number: 0147859641
 Loyalty Status: Gold
-Total Points Earned: 500
+Total Points Earned: 510
+Expiry Date: 2024-08-12
 
 User ID: 192
 User Name: Haha
