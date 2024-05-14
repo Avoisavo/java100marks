@@ -1,6 +1,7 @@
 package redeemitem;
 
 // please refer to updated UML diagram or group leader regarding this class
+
 public class RedeemableItem {
 
     private String name;

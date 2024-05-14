@@ -12,12 +12,12 @@ public class LoyaltyStatus extends EarnedPoints {
     private String status;
     private int pointConvertRate;
 
-    public void readLoyaltyStatusFromFile(int userId) {
+    public void readLoyaltyStatusFromFile(int loggedInUserId) {
         try (BufferedReader reader = new BufferedReader(new FileReader(POINTS_FILE_PATH))) {
             String line;
             int userPoints = 0; 
             while ((line = reader.readLine()) != null) {
-                if (line.startsWith("User ID: " + userId)) {
+                if (line.startsWith("User ID: " + loggedInUserId)) {
                   
                     while ((line = reader.readLine()) != null && !line.isEmpty()) {
                         if (line.startsWith("Total Points Earned: ")) {

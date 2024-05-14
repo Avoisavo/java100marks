@@ -291,8 +291,14 @@ public class Main {
     }
 
     public static void checkLoyalty() {
+        if (loggedInCustomer == null) {
+            System.out.println("Please log in first.");
+            return;
+        }
         System.out.println("You have selected Check Loyalty.");
-
+        System.out.println("your ID: " + loggedInUserId);
+        LoyaltyStatus loyaltyStatus = new LoyaltyStatus();
+        loyaltyStatus.readLoyaltyStatusFromFile(loggedInUserId);
     }
 
     public static void report() {
